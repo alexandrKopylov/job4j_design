@@ -1,11 +1,9 @@
 package ru.job4j.iterator;
 
-
-import java.sql.SQLOutput;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class MatrixIt implements Iterator<Integer> {
+public  class MatrixIt implements Iterator<Integer> {
     private final int[][] data;
     private int row = 0;
     private int column = 0;
@@ -21,9 +19,10 @@ public class MatrixIt implements Iterator<Integer> {
             return false;
         }
 
-        if (column > data[row].length &&  row > data.length ) {
+        if (column > data[row].length &&  row > data.length) {
             return false;
         }
+
         boolean result = false;
         for (int i = row; i < data.length; i++) {
             if (data[i].length != 0) {
@@ -33,6 +32,7 @@ public class MatrixIt implements Iterator<Integer> {
             row++;
             column = 0;
         }
+
         return result;
     }
 
