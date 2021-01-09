@@ -17,37 +17,34 @@ public class SimpleArray<T> implements Iterable<T> {
     }
 
     public void set(int element, T model) {
-        if (checkElement(element)) {
-            data[element] = model;
-        } else {
+        if (!checkElement(element)) {
             throw new NoSuchElementException();
         }
+        data[element] = model;
     }
 
     public void remove(int element) {
-        if (checkElement(element)) {
-            System.arraycopy(data, element + 1, data, element, index - element);
-            data[index--] = null;
-        } else {
+        if (!checkElement(element)) {
             throw new NoSuchElementException();
         }
+        System.arraycopy(data, element + 1, data, element, index - element);
+        data[index--] = null;
     }
 
     public T get(int element) {
-        if (checkElement(element)) {
-            return (T) data[element];
-        } else {
+        if (!checkElement(element)) {
             throw new NoSuchElementException();
         }
+        return (T) data[element];
     }
 
     public boolean checkElement(int element) {
-        return element > 0 && element < index;
+        return element >= 0 && element < index;
     }
 
     @Override
     public Iterator<T> iterator() {
-        Iterator<T> it = new Iterator<T>() {
+        return new Iterator<T>() {
             private int indexIterator = 0;
 
             @Override
@@ -63,6 +60,5 @@ public class SimpleArray<T> implements Iterable<T> {
                 return (T) data[indexIterator++];
             }
         };
-        return it;
     }
 }
