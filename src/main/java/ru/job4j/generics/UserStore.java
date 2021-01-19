@@ -6,12 +6,12 @@ public class UserStore implements Store<User> {
 
     @Override
     public void add(User model) {
-       store.add(model);
+        store.add(model);
     }
 
     @Override
     public boolean replace(String id, User model) {
-        return   store.replace(id, model);
+        return store.replace(id, model);
     }
 
     @Override

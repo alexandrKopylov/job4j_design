@@ -3,62 +3,49 @@ package ru.job4j.generics;
 import java.util.*;
 
 public final class MemStore<T extends Base>   implements Store<T>, Iterable<T> {
+
     private final List<T> mem = new ArrayList<>();
+
+    private int indexOf(String id)  throws NoSuchElementException {
+        int index = 0;
+        boolean exist = false;
+        for (T model : mem) {
+            if (model.getId().equals(id)) {
+                exist = true;
+                break;
+            }
+            index++;
+        }
+        if (!exist) {
+           throw new NoSuchElementException("no id");
+        }
+        return index;
+    }
 
     @Override
     public void add(T model) {
-            mem.add(model);
+        mem.add(model);
     }
 
     @Override
     public boolean replace(String id, T model) {
-        for (int i = 0; i < mem.size(); i++) {
-            if (mem.get(i).getId().equals(id)) {
-                mem.remove(i);
-                mem.add(i, model);
-                return true;
-            }
-        }
-        return false;
+        int index = indexOf(id);
+        mem.set(index, model);
+        return true;
     }
 
     @Override
     public boolean delete(String id) {
-        for (int i = 0; i < mem.size(); i++) {
-            if (mem.get(i).getId().equals(id)) {
-                mem.remove(i);
-                return true;
-            }
-        }
-        return false;
+        int index = indexOf(id);
+        mem.remove(index);
+        return true;
     }
-
-
 
     @Override
     public T findById(String id) {
-        if (!checkId(id)) {
-            throw new NoSuchElementException("no id");
-        }
-        T t = null;
-        for (T value : mem) {
-            if (value.getId().equals(id)) {
-                t =  value;
-            }
-        }
-        return t;
+        int index = indexOf(id);
+        return (T) mem.get(index);
     }
-
-    public boolean checkId(String id) {
-
-        for (T t : mem) {
-            if (t.getId().equals(id)) {
-                return true;
-            }
-        }
-        return  false;
-    }
-
 
     @Override
     public Iterator<T> iterator() {
