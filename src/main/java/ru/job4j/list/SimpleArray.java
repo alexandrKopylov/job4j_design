@@ -1,9 +1,6 @@
 package ru.job4j.list;
 
-import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 public class SimpleArray<T> implements Iterable<T> {
 
@@ -37,8 +34,7 @@ public class SimpleArray<T> implements Iterable<T> {
         if (capacity == index) {
             int oldCapacity = capacity;
             capacity = (capacity * 3) / 2 + 1;
-            Object[] newConteiner = new Object[capacity];
-            System.arraycopy(container, 0, newConteiner, 0, oldCapacity);
+            Object[] newConteiner = Arrays.copyOf(container, capacity);
             container = newConteiner;
         }
         container[index] = model;
