@@ -36,11 +36,11 @@ public class SimpleArray<T> implements Iterable<T> {
             capacity = (capacity * 3) / 2 + 1;
             Object[] newConteiner = Arrays.copyOf(container, capacity);
             container = newConteiner;
-        }
+          }
         container[index] = model;
         index++;
         modCount++;
-    }
+        }
 
     @Override
     public Iterator<T> iterator() {
