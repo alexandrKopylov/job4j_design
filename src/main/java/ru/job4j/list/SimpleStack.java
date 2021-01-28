@@ -14,6 +14,7 @@ public class SimpleStack<T> extends MyLinkedList<T> {
         return t;
 
 
+
     }
 
     public void push(T value) {
