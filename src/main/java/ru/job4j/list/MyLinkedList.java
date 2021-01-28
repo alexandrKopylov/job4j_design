@@ -78,7 +78,7 @@ public class MyLinkedList<T> implements Iterable<T> {
     }
 
 
-    private static class Node<T> {
+   public static class Node<T> {
         T item;
         Node<T> next;
         Node<T> prev;
