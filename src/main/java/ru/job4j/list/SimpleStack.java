@@ -12,6 +12,8 @@ public class SimpleStack<T> extends MyLinkedList<T> {
             throw new NoSuchElementException();
         }
         return t;
+
+
     }
 
     public void push(T value) {

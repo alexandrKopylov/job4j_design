@@ -12,6 +12,7 @@ public class MyLinkedList<T> implements Iterable<T> {
     int modCount = 0;
 
 
+
     public boolean checkElement(int index) {
         return index >= 0 && index < size;
     }
