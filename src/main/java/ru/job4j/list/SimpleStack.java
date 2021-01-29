@@ -5,16 +5,13 @@ import java.util.NoSuchElementException;
 public class SimpleStack<T> extends MyLinkedList<T> {
 
     public T pop() {
-        T t = null;
-        if (last != null) {
-            t = last.item;
-            last = last.prev;
-            if (last == null) {
-                first = null;
-            }
-
-        } else {
+        if (last == null) {
             throw new NoSuchElementException();
+        }
+        T t = last.item;
+        last = last.prev;
+        if (last == null) {
+            first = null;
         }
         size--;
         modCount++;
