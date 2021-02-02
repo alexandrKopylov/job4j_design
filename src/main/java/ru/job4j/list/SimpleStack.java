@@ -2,27 +2,27 @@ package ru.job4j.list;
 
 import java.util.NoSuchElementException;
 
-public class SimpleStack<T> extends MyLinkedList<T> {
-
+public class SimpleStack<T>  {
+    MyLinkedList<T> myLinkedList = new MyLinkedList<>();
     public T pop() {
-        if (last == null) {
+        if (myLinkedList.last == null) {
             throw new NoSuchElementException();
         }
-        T t = last.item;
-        last = last.prev;
-        if (last == null) {
-            first = null;
+        T t = myLinkedList.last.item;
+        myLinkedList.last = myLinkedList.last.prev;
+        if (myLinkedList.last == null) {
+            myLinkedList.first = null;
         }
-        size--;
-        modCount++;
+        myLinkedList.size--;
+        myLinkedList.modCount++;
         return t;
     }
 
     public void push(T value) {
-        add(value);
+        myLinkedList.add(value);
     }
 
     public boolean isEmpty() {
-        return last == null && first == null;
+        return myLinkedList.last == null && myLinkedList.first == null;
     }
 }
