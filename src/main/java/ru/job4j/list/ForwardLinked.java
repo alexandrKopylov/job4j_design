@@ -104,6 +104,7 @@ public class ForwardLinked<T>  implements Iterable<T> {
     }
 
     public   void printing() {
+
         Node<T> tail = head;
         System.out.println(tail.value);
         while (tail.next != null) {
