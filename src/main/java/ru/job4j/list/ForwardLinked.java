@@ -4,19 +4,23 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class ForwardLinked<T>  implements Iterable<T> {
-    private Node<T> head;
+    protected  Node<T> head;
+    private  int size;
 
     public void add(T value) {
         Node<T> node = new Node<>(value, null);
         if (head == null) {
             head = node;
+            size++;
             return;
         }
+
         Node<T> tail = head;
         while (tail.next != null) {
             tail = tail.next;
         }
         tail.next = node;
+        size++;
     }
 
     public T deleteFirst() {
@@ -25,8 +29,30 @@ public class ForwardLinked<T>  implements Iterable<T> {
         }
         T t = head.value;
         head = head.next;
+        size--;
         return t;
     }
+
+    public T deleteLast() {
+        if (size == 1) {
+            T t = head.value;
+            head = null;
+            size--;
+            return t;
+        } else {
+            Node<T> tail = head;
+            int counter = 0;
+            while (counter < size - 2) {
+                tail = tail.next;
+                counter++;
+            }
+            T t = tail.next.value;
+            tail.next = null;
+            size--;
+            return t;
+        }
+    }
+
 
     public void revert() {
         Node<T> previous = null;
@@ -75,5 +101,33 @@ public class ForwardLinked<T>  implements Iterable<T> {
             this.value = value;
             this.next = next;
         }
+    }
+
+    public   void printing() {
+        Node<T> tail = head;
+        System.out.println(tail.value);
+        while (tail.next != null) {
+            tail = tail.next;
+            System.out.println(tail.value);
+        }
+    }
+
+    public static void main(String[] args) {
+        ForwardLinked<Integer> ff  = new ForwardLinked<>();
+        ff.add(1);
+        ff.add(2);
+        ff.add(3);
+        ff.add(4);
+        ff.add(5);
+      //  System.out.println("------------------");
+       // System.out.println("head = " + ff.head.value);
+         ff.printing();
+        System.out.println("------------------");
+        System.out.println(ff.deleteLast());
+        System.out.println(ff.deleteLast());
+        System.out.println(ff.deleteLast());
+        System.out.println(ff.deleteFirst());
+        System.out.println(ff.deleteFirst());
+        System.out.println("size=" + ff.size);
     }
 }
