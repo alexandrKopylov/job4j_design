@@ -1,6 +1,7 @@
 package ru.job4j.list;
 
 import static org.junit.Assert.*;
+
 import org.junit.Test;
 
 import java.util.Iterator;
@@ -8,6 +9,7 @@ import java.util.NoSuchElementException;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+
 public class ForwardLinkedTest {
 
     @Test(expected = NoSuchElementException.class)
@@ -54,6 +56,12 @@ public class ForwardLinkedTest {
         Iterator<Integer> it = linked.iterator();
         assertThat(it.next(), is(2));
         assertThat(it.next(), is(1));
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void whenNewForwardLinkedDeleteLast() {
+        ForwardLinked<Integer> lin = new ForwardLinked<>();
+        lin.deleteLast();
     }
 
 }

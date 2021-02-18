@@ -34,6 +34,9 @@ public class ForwardLinked<T>  implements Iterable<T> {
     }
 
     public T deleteLast() {
+        if (head == null) {
+            throw new NoSuchElementException();
+        }
         if (size == 1) {
             T t = head.value;
             head = null;
@@ -113,6 +116,9 @@ public class ForwardLinked<T>  implements Iterable<T> {
         }
     }
 
+    public boolean isEmpty() {
+        return head == null;
+    }
     public static void main(String[] args) {
         ForwardLinked<Integer> ff  = new ForwardLinked<>();
         ff.add(1);
