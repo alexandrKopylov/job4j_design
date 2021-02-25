@@ -3,27 +3,25 @@ package ru.job4j.set;
 import ru.job4j.list.SimpleArray;
 
 import java.util.*;
+import java.util.jar.JarOutputStream;
 
 public class SimpleSet<T> implements Iterable<T> {
 
-    SimpleArray<T>  simpleArray = new SimpleArray<>();
+    SimpleArray<T> simpleArray = new SimpleArray<>();
 
-    public void add(T t) {
+    public boolean contains(T value) {
         boolean isNewElement = true;
-
         for (T item : simpleArray) {
-            if (item == null) {
-                if (t == null) {
-                    isNewElement = false;
-                    break;
-                }
-            } else if (item.equals(t)) {
+            if (Objects.equals(value, item)) {
                 isNewElement = false;
                 break;
             }
         }
+        return isNewElement;
+    }
 
-        if (isNewElement) {
+    public void add(T t) {
+        if (contains(t)) {
             simpleArray.add(t);
         }
     }
@@ -33,7 +31,7 @@ public class SimpleSet<T> implements Iterable<T> {
     public Iterator<T> iterator() {
         return simpleArray.iterator();
     }
+}
 
-    }
 
 
