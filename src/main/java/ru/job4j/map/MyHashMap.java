@@ -28,8 +28,7 @@ public class MyHashMap<K, V> implements Iterable {
         if (size == capacity) {
             resize();
         }
-        int baket = hash(key) % capacity;
-        baket = baket < 0 ? baket * (-1) : baket;
+        int baket = baketFromKey(key);
         if (table[baket] == null) {
             table[baket] = new Entry(key, value);
             size++;
@@ -40,39 +39,51 @@ public class MyHashMap<K, V> implements Iterable {
         }
     }
 
+    private int baketFromKey(K key) {
+        int temp = hash(key) % capacity;
+        temp = temp < 0 ? temp * (-1) : temp;
+        return temp;
+    }
+
 
     public void resize() {
+        int oldCapacity = capacity;
         capacity *= 2;
         Entry[] newConteiner = new Entry[capacity];
-        for (int i = 0; i < size; i++) {
-            int baket = table[i].hash % capacity;
-            baket = baket < 0 ? baket * (-1) : baket;
-            newConteiner[baket] = table[i];
+        for (int i = 0; i < oldCapacity; i++) {
+            newConteiner[baketFromKey((K) table[i].key)] = table[i];
         }
         table = newConteiner;
     }
 
 
     public V get(K key) {
-        int baket = hash(key) % capacity;
-        baket = baket < 0 ? baket * (-1) : baket;
+        V result = null;
+        int baket = baketFromKey(key);
+        Entry entry = table[baketFromKey(key)];
 
-        Entry entry = table[baket];
-        return entry == null ? null : (V) entry.value;
+        if (table[baket] != null &&
+                hash(key) == entry.hash &&
+                (key != null && key.equals(entry.key))) {
+            result = (V) entry.value;
+        }
+        return result;
     }
 
 
     public boolean delete(K key) {
-        int baket = hash(key) % capacity;
-        baket = baket < 0 ? baket * (-1) : baket;
-        if (table[baket] != null) {
+        boolean result = false;
+        int baket = baketFromKey(key);
+        Entry entry = table[baket];
+        if (entry != null &&
+                hash(key) == entry.hash &&
+                (key != null && key.equals(entry.key))) {
             table[baket] = null;
             size--;
             modCount++;
-            return true;
-        } else {
-            return false;
+            result = true;
         }
+        return result;
     }
 
 
@@ -113,7 +124,7 @@ public class MyHashMap<K, V> implements Iterable {
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException("collection modified (fail-fast)");
                 }
-                return (Entry) table[indexIterator++];
+                return table[indexIterator++];
             }
         };
     }
@@ -123,5 +134,4 @@ public class MyHashMap<K, V> implements Iterable {
         int h;
         return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
     }
-
 }
