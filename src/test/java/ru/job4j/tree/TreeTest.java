@@ -41,9 +41,4 @@ public class TreeTest {
                 is(2)
         );
     }
-
-
-
-
-
 }
