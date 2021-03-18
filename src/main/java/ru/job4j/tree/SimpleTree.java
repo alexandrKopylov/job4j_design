@@ -3,6 +3,7 @@ package ru.job4j.tree;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 public interface SimpleTree<E> {
 
@@ -16,6 +17,14 @@ public interface SimpleTree<E> {
 
         public Node(E value) {
             this.value = value;
+        }
+
+        @Override
+        public String toString() {
+            return "Node{" +
+                    "value=" + value +
+                    ", children=" + children +
+                    '}';
         }
     }
 }
