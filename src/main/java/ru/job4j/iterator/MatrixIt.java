@@ -22,12 +22,20 @@ public  class MatrixIt implements Iterator<Integer> {
         return row < data.length;
     }
 
-
     @Override
     public Integer next() {
         if (!hasNext()) {
             throw new NoSuchElementException();
         }
        return data[row][column++];
+    }
+
+    public static void main(String[] args) {
+        int[][] ppp = {{1,2}, {8,9} , {11,12,13}};    MatrixIt mi = new MatrixIt(ppp);
+        while(mi.hasNext()){
+          int ttt =  mi.next();
+        }
+
+
     }
 }
