@@ -29,4 +29,12 @@ public class EvenNumbersIterator implements Iterator<Integer> {
         }
         return data[point++];
     }
+
+    public static void main(String[] args) {
+        int[] data = {1,1,3,5,6};
+        EvenNumbersIterator ff = new EvenNumbersIterator(data);
+        while (ff.hasNext())
+            System.out.println(ff.next());
+
+    }
 }
