@@ -32,6 +32,9 @@ import java.util.*;
  * Требуется, чтобы асимптотическое время работы полученного решения было
  * линейным, или близким к линейному.
  */
+
+//public Map<String, Set<String>> merge(Map<String, Set<String>> data)
+
 public class Task1 {
 
     public static List<Set<String>> mergeUsers(List<List<String>> listUsers) {
@@ -55,4 +58,9 @@ public class Task1 {
             }
         }
     }
+
+
+
+
+
 }
