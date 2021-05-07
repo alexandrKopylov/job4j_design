@@ -1,28 +1,32 @@
 package ru.job4j.zadanie;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Analize {
 
+
     public Info diff(List<User> previous, List<User> current) {
         Info info = new Info();
-        if (previous.size() > current.size()) {
-            info.deleted = previous.size() - current.size();
+
+        Map<Integer, String> previousMap = new HashMap();
+        for (User user : previous) {
+            previousMap.put(user.id, user.name);
         }
-        if (previous.size() < current.size()) {
-            info.added = current.size() - previous.size();
+        Map<Integer, String> currentMap = new HashMap();
+        for (User user : current) {
+            currentMap.put(user.id, user.name);
         }
 
-        if (previous.size() == current.size()) {
-            for (int i = 0; i < current.size(); i++) {
-                if (!current.get(i).name.equals(previous.get(i).name)) {
-                    info.changed++;
-                }
+        for (int keyId : previousMap.keySet()) {
+            boolean bol1 = currentMap.containsKey(keyId);
+            boolean bol2 = !currentMap.get(keyId).contains(previousMap.get(keyId));
+            if (bol1 && bol2) {
+                info.changed++;
+            } else if (!currentMap.containsKey(keyId)) {
+                info.deleted++;
             }
         }
+        info.added = currentMap.size() - (previousMap.size() - info.deleted);
         return info;
     }
 
@@ -33,6 +37,20 @@ public class Analize {
         public User(int id, String name) {
             this.id = id;
             this.name = name;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            User user = (User) o;
+            return id == user.id &&
+                    Objects.equals(name, user.name);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(id, name);
         }
     }
 
