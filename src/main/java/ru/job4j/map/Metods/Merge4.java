@@ -1,7 +1,5 @@
 package ru.job4j.map.Metods;
 
-import ru.job4j.generics.SimpleArray;
-
 import java.util.*;
 
 public class Merge4 {

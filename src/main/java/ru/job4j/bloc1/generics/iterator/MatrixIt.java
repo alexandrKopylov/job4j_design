@@ -1,6 +1,5 @@
-package ru.job4j.iterator;
+package ru.job4j.bloc1.generics.iterator;
 
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 

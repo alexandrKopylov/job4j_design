@@ -1,8 +1,7 @@
-package ru.job4j.iterator;
+package ru.job4j.bloc1.generics.iterator;
 
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.List;
 import java.util.NoSuchElementException;
 
 public class FlatMap<T> implements Iterator<T> {

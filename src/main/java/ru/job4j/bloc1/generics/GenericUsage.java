@@ -1,4 +1,4 @@
-package ru.job4j.generics;
+package ru.job4j.bloc1.generics;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.*;

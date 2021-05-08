@@ -1,4 +1,4 @@
-package ru.job4j.generics;
+package ru.job4j.bloc1.generics;
 
 public abstract class Base {
     private final String id;
