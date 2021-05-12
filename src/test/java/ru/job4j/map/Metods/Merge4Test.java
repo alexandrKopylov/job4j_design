@@ -2,6 +2,7 @@ package ru.job4j.map.Metods;
 
 import org.junit.Assert;
 import org.junit.Test;
+
 import java.util.*;
 
 public class Merge4Test {
@@ -37,11 +38,8 @@ public class Merge4Test {
         map.put("user4", set4);
         map.put("user5", set5);
 
-       Map<String, Set<String>>  result = merge4.merge(map);
-       int expected  = result.size();
+        Map<String, Set<String>> result = merge4.merge(map);
+        int expected = result.size();
         Assert.assertEquals(expected, 2);
-
-
-
     }
 }
