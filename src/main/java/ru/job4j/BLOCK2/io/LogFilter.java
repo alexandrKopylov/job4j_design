@@ -8,13 +8,14 @@ import java.util.regex.Pattern;
 
 
 public class LogFilter {
+    private static Pattern pattern = Pattern.compile(".*\\s404\\s.*");
 
     public static List<String> filter(String file) {
         List<String> list = new ArrayList<>();
         try (BufferedReader in = new BufferedReader(new FileReader(file))) {
 
             for (String line = in.readLine(); line != null; line = in.readLine()) {
-                if ( Pattern.matches(".*\\s404\\s.*", line)) {
+                if (  pattern.matcher(line).matches()) {
                     list.add(line);
                 }
             }
