@@ -2,6 +2,7 @@ package ru.job4j.BLOCK2.io;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.regex.Pattern;
@@ -23,7 +24,7 @@ public class Config {
                     .filter(Config::stringsFilter)
                     .forEach(s -> values.put(s.substring(0, s.indexOf("=")), s.substring(s.indexOf("=") + 1))
                     );
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -49,7 +50,7 @@ public class Config {
         StringJoiner out = new StringJoiner(System.lineSeparator());
         try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
             read.lines().forEach(out::add);
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return out.toString();
@@ -58,6 +59,7 @@ public class Config {
 
     public static void main(String[] args) {
         Config cfg = new Config("app.properties");
+        cfg.load();
 
     }
 }
