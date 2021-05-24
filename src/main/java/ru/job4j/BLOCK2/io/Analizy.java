@@ -6,6 +6,7 @@ public class Analizy {
     public void unavailable(String source, String target) {
 
         try (BufferedReader reader = new BufferedReader(new FileReader(source))) {
+
             try (BufferedWriter writter = new BufferedWriter(new FileWriter(target))) {
                 String line;
                 boolean startDiapazon = false;
