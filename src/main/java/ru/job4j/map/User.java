@@ -15,12 +15,16 @@ public class User {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         User user = (User) o;
-        return children == user.children &&
-                Objects.equals(name, user.name) &&
-                Objects.equals(birthday, user.birthday);
+        return children == user.children
+                && Objects.equals(name, user.name)
+                && Objects.equals(birthday, user.birthday);
     }
 
     @Override
@@ -49,7 +53,6 @@ public class User {
 //        System.out.println( user7.hashCode());
 
 
-
 //        Map<User, Object> map  = new HashMap<>();
 //        map.put(user1,"piska");
 //        map.put(user2,"piska");
@@ -60,16 +63,16 @@ public class User {
 //        map.put(user7,"piska");
 
 
-   //   Object ttt = map.put(user2,"jopa");
+        //   Object ttt = map.put(user2,"jopa");
 
 
-   //    System.out.println((String) ttt);
-     //   System.out.println(map.size());
-   //     System.out.println(map.get(user3));
-     //  System.out.println( map.containsKey(user3));
+        //    System.out.println((String) ttt);
+        //   System.out.println(map.size());
+        //     System.out.println(map.get(user3));
+        //  System.out.println( map.containsKey(user3));
 
-        System.out.println(1&15);
-        System.out.println(17&15);
+        System.out.println(1 & 15);
+        System.out.println(17 & 15);
 
     }
 }

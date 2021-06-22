@@ -1,8 +1,6 @@
-package ru.job4j.BLOCK2.io;
+package ru.job4j.block2.io;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ReadFileBuffer {
     public static void main(String[] args) {

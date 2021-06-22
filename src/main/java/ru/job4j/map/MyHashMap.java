@@ -62,9 +62,9 @@ public class MyHashMap<K, V> implements Iterable {
         int baket = baketFromKey(key);
         Entry entry = table[baketFromKey(key)];
 
-        if (table[baket] != null &&
-                hash(key) == entry.hash &&
-                (key != null && key.equals(entry.key))) {
+        if (table[baket] != null
+                && hash(key) == entry.hash
+                && (key != null && key.equals(entry.key))) {
             result = (V) entry.value;
         }
         return result;
@@ -75,9 +75,9 @@ public class MyHashMap<K, V> implements Iterable {
         boolean result = false;
         int baket = baketFromKey(key);
         Entry entry = table[baket];
-        if (entry != null &&
-                hash(key) == entry.hash &&
-                (key != null && key.equals(entry.key))) {
+        if (entry != null
+                && hash(key) == entry.hash
+                && (key != null && key.equals(entry.key))) {
             table[baket] = null;
             size--;
             modCount++;
@@ -131,7 +131,11 @@ public class MyHashMap<K, V> implements Iterable {
 
 
     private static int hash(Object key) {
-        int h;
-        return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
+        if (key == null) {
+            return 0;
+        }
+        int h = key.hashCode();
+        int k = h >>> 16;
+        return  h ^ k;
     }
 }

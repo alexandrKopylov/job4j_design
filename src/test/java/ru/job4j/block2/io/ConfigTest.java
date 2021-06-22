@@ -1,4 +1,4 @@
-package ru.job4j.BLOCK2.io;
+package ru.job4j.block2.io;
 
 
 import org.junit.Test;

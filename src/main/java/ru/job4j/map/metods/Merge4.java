@@ -1,4 +1,4 @@
-package ru.job4j.map.Metods;
+package ru.job4j.map.metods;
 import java.util.*;
 
 public class Merge4 {
@@ -33,7 +33,7 @@ public class Merge4 {
         Set<String> emails;
 
         for (Map.Entry<String, String> entry : emailMap.entrySet()) {
-             emails = resultMap.getOrDefault(entry.getValue(), emails = new HashSet<>());
+             emails = resultMap.getOrDefault(entry.getValue(),  new HashSet<>());
              emails.add(entry.getKey());
              resultMap.put(entry.getValue(), emails);
         }

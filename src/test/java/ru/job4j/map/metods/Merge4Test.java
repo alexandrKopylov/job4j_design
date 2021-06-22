@@ -1,4 +1,4 @@
-package ru.job4j.map.Metods;
+package ru.job4j.map.metods;
 
 import org.junit.Assert;
 import org.junit.Test;

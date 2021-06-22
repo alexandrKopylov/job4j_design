@@ -1,4 +1,4 @@
-package ru.job4j.BLOCK2.io;
+package ru.job4j.block2.io;
 
 
 import static org.junit.Assert.assertThat;
@@ -9,7 +9,6 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
 import java.io.*;
-import java.util.List;
 
 public class AnalizyTest {
     @Rule

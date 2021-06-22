@@ -1,4 +1,4 @@
-package ru.job4j.BLOCK2.io;
+package ru.job4j.block2.io;
 
 
 import java.io.File;
@@ -14,7 +14,7 @@ public class Dir {
         }
         System.out.println(String.format("size : %s", file.getTotalSpace()));
         for (File subfile : file.listFiles()) {
-            System.out.println(subfile.getName() + " : " + subfile.length() +" Bait");
+            System.out.println(subfile.getName() + " : " + subfile.length() + " Bait");
 
         }
     }

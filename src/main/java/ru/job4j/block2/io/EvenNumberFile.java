@@ -1,4 +1,4 @@
-package ru.job4j.BLOCK2.io;
+package ru.job4j.block2.io;
 
 import java.io.FileInputStream;
 
@@ -14,10 +14,10 @@ public class EvenNumberFile {
             e.printStackTrace();
         }
 
-        String[] lines = text.toString().trim().split(System.lineSeparator());
+        String[] lines = text.toString().trim().split(" ");
         for (String line : lines) {
             int digit = Integer.parseInt(line);
-            if (digit !=1  &&   digit / 2 == 0) {
+            if (digit != 1  &&   digit / 2 == 0) {
                 System.out.println("true");
             } else {
                 System.out.println("false");

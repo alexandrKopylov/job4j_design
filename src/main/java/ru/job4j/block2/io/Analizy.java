@@ -1,4 +1,4 @@
-package ru.job4j.BLOCK2.io;
+package ru.job4j.block2.io;
 
 import java.io.*;
 
@@ -30,6 +30,6 @@ public class Analizy {
 
     public static void main(String[] args) {
         Analizy analizy = new Analizy();
-        analizy.unavailable("server.log","unavailable.csv");
+        analizy.unavailable("server.log", "unavailable.csv");
     }
 }

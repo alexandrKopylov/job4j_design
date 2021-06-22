@@ -21,10 +21,12 @@ public interface SimpleTree<E> {
 
         @Override
         public String toString() {
-            return "Node{" +
-                    "value=" + value +
-                    ", children=" + children +
-                    '}';
+            return "Node{"
+                    + "value="
+                    + value
+                    + ", children="
+                    + children
+                    + '}';
         }
     }
 }

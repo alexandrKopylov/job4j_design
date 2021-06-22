@@ -3,7 +3,7 @@ package ru.job4j.bloc1.generics.iterator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public  class MatrixIt implements Iterator<Integer> {
+public class MatrixIt implements Iterator<Integer> {
     private final int[][] data;
     private int row = 0;
     private int column = 0;
@@ -26,13 +26,14 @@ public  class MatrixIt implements Iterator<Integer> {
         if (!hasNext()) {
             throw new NoSuchElementException();
         }
-       return data[row][column++];
+        return data[row][column++];
     }
 
     public static void main(String[] args) {
-        int[][] ppp = {{1,2}, {8,9} , {11,12,13}};    MatrixIt mi = new MatrixIt(ppp);
-        while(mi.hasNext()){
-          int ttt =  mi.next();
+        int[][] ppp = {{1, 2}, {8, 9}, {11, 12, 13}};
+        MatrixIt mi = new MatrixIt(ppp);
+        while (mi.hasNext()) {
+            int ttt = mi.next();
         }
 
 

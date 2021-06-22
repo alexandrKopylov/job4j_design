@@ -1,10 +1,9 @@
-package ru.job4j.BLOCK2.io;
+package ru.job4j.block2.io;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
-import java.util.function.Consumer;
 import java.util.regex.Pattern;
 
 public class Config {
