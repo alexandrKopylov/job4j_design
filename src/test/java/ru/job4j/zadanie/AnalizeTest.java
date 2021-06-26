@@ -22,12 +22,13 @@ public class AnalizeTest {
         current.add(new Analize.User(444, "Vova"));
 
         Analize analize = new Analize();
-        Analize.Info info  = analize.diff(previous, current);
+        Analize.Info info = analize.diff(previous, current);
         assertThat(info.added, is(1));
         assertThat(info.deleted, is(0));
         assertThat(info.changed, is(0));
 
     }
+
     @Test
     public void whenPreviosMoreThenCurrent() {
 
@@ -40,7 +41,7 @@ public class AnalizeTest {
         current.remove(0);
 
         Analize analize = new Analize();
-        Analize.Info info  = analize.diff(previous, current);
+        Analize.Info info = analize.diff(previous, current);
         assertThat(info.added, is(0));
         assertThat(info.deleted, is(1));
         assertThat(info.changed, is(0));
@@ -61,7 +62,7 @@ public class AnalizeTest {
         current.add(new Analize.User(333, "Dima"));
 
         Analize analize = new Analize();
-        Analize.Info info  = analize.diff(previous, current);
+        Analize.Info info = analize.diff(previous, current);
         assertThat(info.added, is(0));
         assertThat(info.deleted, is(0));
         assertThat(info.changed, is(2));

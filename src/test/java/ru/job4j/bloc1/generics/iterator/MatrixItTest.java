@@ -72,7 +72,7 @@ public class MatrixItTest {
     @Test
     public void test2() {
         int[][] in = {
-                {}, {1}, {}, {}, {2}, {} ,{}
+                {}, {1}, {}, {}, {2}, {}, {}
         };
         MatrixIt it = new MatrixIt(in);
         assertThat(it.next(), is(1));
@@ -91,6 +91,7 @@ public class MatrixItTest {
         assertThat(it.next(), is(4));
 
     }
+
     @Test
     public void whenEmpty() {
         int[][] in = {

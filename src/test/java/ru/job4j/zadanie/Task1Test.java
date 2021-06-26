@@ -41,7 +41,7 @@ public class Task1Test {
         lst.add(user4);
         lst.add(user5);
 
-        List<Set<String>> rsl =  Task1.mergeUsers(lst);
+        List<Set<String>> rsl = Task1.mergeUsers(lst);
 
         assertThat(rsl.get(0), is("xxx@ya.ru,foo@gmail.com,lol@mail.ru,ups@pisem.net,aaa@bbb.ru"));
         assertThat(rsl.get(1), is("vasya@pupkin.com, xyz@pisem.net"));

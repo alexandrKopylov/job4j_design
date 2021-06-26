@@ -27,23 +27,23 @@ public class ListUtilsTest {
 
     @Test
     public void whenRemoveIf() {
-        List<Integer> input = new ArrayList<>(Arrays.asList(1, 2 , 3, 4, 5));
+        List<Integer> input = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
         ListUtils.removeIf(input, x -> x > 3);
         assertThat(Arrays.asList(1, 2, 3), Is.is(input));
     }
 
     @Test
     public void whenReplaceIf() {
-        List<Integer> input = new ArrayList<>(Arrays.asList(1, 2 , 3, 4, 5));
+        List<Integer> input = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
         ListUtils.replaceIf(input, x -> x == 3, 333);
-        assertThat(Arrays.asList(1, 2, 333 , 4 , 5), Is.is(input));
+        assertThat(Arrays.asList(1, 2, 333, 4, 5), Is.is(input));
     }
 
     @Test
     public void whenRemoveAll() {
-        List<Integer> input = new ArrayList<>(Arrays.asList(1, 2 , 3, 4, 5));
-        List<Integer> del = new ArrayList<>(Arrays.asList( 2 , 3, 4 ));
-        ListUtils.removeAll(input,del);
+        List<Integer> input = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
+        List<Integer> del = new ArrayList<>(Arrays.asList(2, 3, 4));
+        ListUtils.removeAll(input, del);
         assertThat(Arrays.asList(1, 5), Is.is(input));
     }
 

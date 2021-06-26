@@ -3,8 +3,10 @@ package ru.job4j.bloc1.generics.iterator;
 
 import org.junit.Before;
 import org.junit.Test;
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
@@ -14,7 +16,7 @@ public class EvenNumbersIteratorTest {
 
     @Before
     public void setUp() {
-        it = new EvenNumbersIterator(new int[] {1, 2, 3, 4, 5, 6, 7});
+        it = new EvenNumbersIterator(new int[]{1, 2, 3, 4, 5, 6, 7});
     }
 
     @Test(expected = NoSuchElementException.class)
@@ -39,14 +41,14 @@ public class EvenNumbersIteratorTest {
     }
 
     @Test
-    public void  shouldReturnFalseIfNoAnyEvenNumbers() {
+    public void shouldReturnFalseIfNoAnyEvenNumbers() {
         it = new EvenNumbersIterator(new int[]{1});
         assertThat(it.hasNext(), is(false));
     }
 
     @Test
     public void allNumbersAreEven() {
-        it = new EvenNumbersIterator(new int[] {2, 4, 6, 8});
+        it = new EvenNumbersIterator(new int[]{2, 4, 6, 8});
         assertThat(it.hasNext(), is(true));
         assertThat(it.next(), is(2));
         assertThat(it.hasNext(), is(true));
