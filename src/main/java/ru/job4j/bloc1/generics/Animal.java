@@ -1,0 +1,4 @@
+package ru.job4j.bloc1.generics;
+
+public class Animal {
+}
