@@ -21,5 +21,6 @@ public class Search {
         SearchFiles searcher = new SearchFiles(p -> p.toFile().getName().endsWith(ext));
         Files.walkFileTree(root, searcher);
         return searcher.getPaths();
+
     }
 }
