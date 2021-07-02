@@ -8,15 +8,17 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class Search {
+
     public static void main(String[] args) throws IOException {
-        String str = "c:\\Program Files\\AutoCAD 2010";
-        Predicate<Path> predicate = p -> p.toFile().getName().endsWith("exe");
-        Path root = Paths.get(str);
-        search(root, predicate).forEach(System.out::println);
+        if (args.length < 2) {
+            throw new IllegalArgumentException();
+        }
+        Path start = Paths.get(args[0]);
+        search(start, args[1]).forEach(System.out::println);
     }
 
-    public static List<Path> search(Path root, Predicate<Path> predicate) throws IOException {
-        PrintFiles searcher = new PrintFiles(predicate);
+    public static List<Path> search(Path root, String ext) throws IOException {
+        SearchFiles searcher = new SearchFiles(p -> p.toFile().getName().endsWith(ext));
         Files.walkFileTree(root, searcher);
         return searcher.getPaths();
     }
