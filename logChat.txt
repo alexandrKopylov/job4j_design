@@ -1,0 +1,19 @@
+Go dialogue, input your text : 
+fgg
+			фраза 5
+jijij
+			фраза 5
+stop
+hkjh
+jjhkh
+ygygy
+cont
+			фраза 1
+jiojio
+			фраза 6
+ijiojioj
+			фраза 6
+huuhu
+			фраза 9
+out
+Close dialogue. 
