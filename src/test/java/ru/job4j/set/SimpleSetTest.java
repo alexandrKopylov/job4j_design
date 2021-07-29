@@ -3,9 +3,12 @@ package ru.job4j.set;
 import org.hamcrest.core.Is;
 import org.junit.Test;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
@@ -55,4 +58,9 @@ public class SimpleSetTest {
         List<Integer> expected2 = Arrays.asList(1, null, 2, 3);
         assertThat(actual, is(expected2));
     }
+
+
+
+
+
 }
