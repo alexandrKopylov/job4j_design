@@ -6,6 +6,7 @@ import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
+import java.util.StringJoiner;
 import java.util.regex.Pattern;
 
 public class CSVReader {
@@ -23,17 +24,17 @@ public class CSVReader {
         String arg4 = csvArgs.get("filter");
 
         Selector selector = csvr.validation(arg1, arg2, arg4);
-        StringBuilder strBild = csvr.reader(selector, arg1, arg3);
+        String strBild = csvr.reader(selector, arg1, arg3);
         out(arg2, strBild);
 
     }
 
-    private static void out(String arg2, StringBuilder strBild) {
+    private static void out(String arg2, String strBild) {
         if (arg2.equals("stdout")) {
-            System.out.println(strBild.toString());
+            System.out.println(strBild);
         } else {
             try (PrintWriter pw = new PrintWriter(new FileWriter(arg2, StandardCharsets.UTF_8, true))) {
-                pw.write(strBild.toString());
+                pw.write(strBild);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -84,49 +85,50 @@ public class CSVReader {
         return sel;
     }
 
-    private StringBuilder reader(Selector selector, String path, String delimiter) throws FileNotFoundException {
+    private String reader(Selector selector, String path, String delimiter) throws FileNotFoundException {
 
         StringBuilder strBild = new StringBuilder();
         strBild.append(System.lineSeparator());
         Pattern ptn = Pattern.compile("\\n|" + delimiter);
         Scanner sc = new Scanner(new File(path)).useDelimiter(ptn);
+        StringJoiner line = new StringJoiner(System.lineSeparator());
 
         int n = 0;
         String token;
 
         while (sc.hasNext()) {
-
+            StringJoiner joiner = new StringJoiner(delimiter);
             token = sc.next().trim();
             if (selector.isName() && n == 0) {
-                strBild.append(token + "\t\t");
+                joiner.add(token);
             }
             n++;
             token = sc.next().trim();
             if (selector.isAge() && n == 1) {
-                strBild.append(token + "\t\t");
+                joiner.add(token);
             }
             n++;
             token = sc.next().trim();
             if (selector.isBirthDate() && n == 2) {
-                strBild.append(token + "\t\t");
+                joiner.add(token);
             }
             n++;
             token = sc.next().trim();
             if (selector.isEducation() && n == 3) {
-                strBild.append(token + "\t\t");
+                joiner.add(token);
             }
             n++;
             token = sc.next().trim();
             if (selector.isChildren() && n == 4) {
-                strBild.append(token + "\t\t");
+                joiner.add(token);
             }
             n++;
             if (n == 5) {
-                strBild.append(System.lineSeparator());
+                line.add(joiner.toString());
                 n = 0;
             }
         }
-        strBild.append("--------------------------------------------------------------------------");
-        return strBild;
+
+        return line.toString();
     }
 }
