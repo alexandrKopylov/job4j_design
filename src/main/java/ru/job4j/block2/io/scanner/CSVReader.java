@@ -23,8 +23,8 @@ public class CSVReader {
         String arg3 = csvArgs.get("delimiter");
         String arg4 = csvArgs.get("filter");
 
-        Selector selector = csvr.validation(arg1, arg2, arg4);
-        String strBild = csvr.reader(selector, arg1, arg3);
+         csvr.validation(arg1, arg2, arg4);
+        String strBild = csvr.reader( arg1, arg3, arg4);
         out(arg2, strBild);
 
     }
@@ -41,7 +41,7 @@ public class CSVReader {
         }
     }
 
-    public Selector validation(String path, String out, String filter) {
+    public void validation(String path, String out, String filter) {
         if (!new File(path).exists()) {
             throw new IllegalArgumentException("wrong file csv");
         }
@@ -66,29 +66,12 @@ public class CSVReader {
         if (stringFilter.length > 5) {
             throw new IllegalArgumentException("wrong argument filter > 5");
         }
-        Selector sel = new Selector();
-        if (filter.contains("name")) {
-            sel.setName(true);
-        }
-        if (filter.contains("age")) {
-            sel.setAge(true);
-        }
-        if (filter.contains("birthDate")) {
-            sel.setBirthDate(true);
-        }
-        if (filter.contains("education")) {
-            sel.setEducation(true);
-        }
-        if (filter.contains("children")) {
-            sel.setChildren(true);
-        }
-        return sel;
     }
 
-    private String reader(Selector selector, String path, String delimiter) throws FileNotFoundException {
+    private String reader( String path, String delimiter, String filter) throws FileNotFoundException {
 
-        StringBuilder strBild = new StringBuilder();
-        strBild.append(System.lineSeparator());
+       // StringBuilder strBild = new StringBuilder();
+        //strBild.append(System.lineSeparator());
         Pattern ptn = Pattern.compile("\\n|" + delimiter);
         Scanner sc = new Scanner(new File(path)).useDelimiter(ptn);
         StringJoiner line = new StringJoiner(System.lineSeparator());
@@ -99,27 +82,27 @@ public class CSVReader {
         while (sc.hasNext()) {
             StringJoiner joiner = new StringJoiner(delimiter);
             token = sc.next().trim();
-            if (selector.isName() && n == 0) {
+            if (filter.contains(StructuraCSV.name.toString())   && n == 0) {
                 joiner.add(token);
             }
             n++;
             token = sc.next().trim();
-            if (selector.isAge() && n == 1) {
+            if (filter.contains(StructuraCSV.age.toString())   && n == 1) {
                 joiner.add(token);
             }
             n++;
             token = sc.next().trim();
-            if (selector.isBirthDate() && n == 2) {
+            if (filter.contains(StructuraCSV.birthDate.toString())   && n == 2) {
                 joiner.add(token);
             }
             n++;
             token = sc.next().trim();
-            if (selector.isEducation() && n == 3) {
+            if (filter.contains(StructuraCSV.education.toString())   && n == 3) {
                 joiner.add(token);
             }
             n++;
             token = sc.next().trim();
-            if (selector.isChildren() && n == 4) {
+            if (filter.contains(StructuraCSV.children.toString())   && n == 4) {
                 joiner.add(token);
             }
             n++;
