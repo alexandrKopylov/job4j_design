@@ -34,7 +34,6 @@ public class CSVReader {
         }
         return mas;
     }
-
     private static void out(String arg2, String strBild) {
         if (arg2.equals("stdout")) {
             System.out.println(strBild);
@@ -46,7 +45,6 @@ public class CSVReader {
             }
         }
     }
-
     public void validation(String path, String out, String filter) {
         if (!new File(path).exists()) {
             throw new IllegalArgumentException("wrong file csv");
@@ -73,7 +71,6 @@ public class CSVReader {
             throw new IllegalArgumentException("wrong argument filter > 5");
         }
     }
-
     private String reader(String[] columns, String path, String delimiter, String filter) throws FileNotFoundException {
         Pattern ptn = Pattern.compile("\\n|" + delimiter);
         Scanner sc = new Scanner(new File(path)).useDelimiter(ptn);
