@@ -1,0 +1,9 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+<student  isday="true" age="22" name = "Sasha">
+   <Praktika factory="kmz" age="2001"/>
+    <languages>
+        <language>java</language>
+        <language>python</language>
+        <language>c++</language>
+    </languages>
+</student>
