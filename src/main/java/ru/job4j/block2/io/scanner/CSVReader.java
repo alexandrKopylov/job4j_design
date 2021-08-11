@@ -4,6 +4,8 @@ import ru.job4j.block2.io.ArgsName;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.StringJoiner;
 import java.util.regex.Pattern;
@@ -15,36 +17,43 @@ public class CSVReader {
         }
         CSVReader csvr = new CSVReader();
         ArgsName csvArgs = ArgsName.of(args);
-        String arg1 = csvArgs.get("path");
-        String arg2 = csvArgs.get("out");
-        String arg3 = csvArgs.get("delimiter");
-        String arg4 = csvArgs.get("filter");
+        String path = csvArgs.get("path");
+        String out = csvArgs.get("out");
+        String delimiter = csvArgs.get("delimiter");
+        String filter = csvArgs.get("filter");
 
-        csvr.validation(arg1, arg2, arg4);
-        String[] columns = csvr.getColumns(arg1, arg3);
-        String strBild = csvr.reader(columns, arg1, arg3, arg4);
-        out(arg2, strBild);
+        csvr.validation(path, out, filter);
+        List<Integer> listIndexsesFilter = csvr.getColumns(path, delimiter, filter);
+        String strBild = csvr.reader(listIndexsesFilter, path, delimiter);
+        output(out, strBild);
     }
 
-    private String[] getColumns(String arg1, String arg3) throws FileNotFoundException {
-        String[] mas = null;
-        Scanner sc = new Scanner(new File(arg1));
+    private List<Integer> getColumns(String path, String delimiter, String filter) throws FileNotFoundException {
+        List<Integer> listIndexses = new ArrayList<>();
+        Scanner sc = new Scanner(new File(path));
         if (sc.hasNextLine()) {
-            mas = sc.nextLine().split(arg3);
+            String[] namesColumns = sc.nextLine().split(delimiter);
+            for (int i = 0; i < namesColumns.length; i++) {
+                if (filter.contains(namesColumns[i])) {
+                    listIndexses.add(i);
+                }
+            }
         }
-        return mas;
+        return listIndexses;
     }
-    private static void out(String arg2, String strBild) {
-        if (arg2.equals("stdout")) {
+
+    private static void output(String out, String strBild) {
+        if (out.equals("stdout")) {
             System.out.println(strBild);
         } else {
-            try (PrintWriter pw = new PrintWriter(new FileWriter(arg2, StandardCharsets.UTF_8, true))) {
+            try (PrintWriter pw = new PrintWriter(new FileWriter(out, StandardCharsets.UTF_8, true))) {
                 pw.write(strBild);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
+
     public void validation(String path, String out, String filter) {
         if (!new File(path).exists()) {
             throw new IllegalArgumentException("wrong file csv");
@@ -71,18 +80,16 @@ public class CSVReader {
             throw new IllegalArgumentException("wrong argument filter > 5");
         }
     }
-    private String reader(String[] columns, String path, String delimiter, String filter) throws FileNotFoundException {
+
+    private String reader(List<Integer> listIndexses, String path, String delimiter) throws FileNotFoundException {
         Pattern ptn = Pattern.compile("\\n|" + delimiter);
         Scanner sc = new Scanner(new File(path)).useDelimiter(ptn);
         StringJoiner line = new StringJoiner(System.lineSeparator());
-        String token;
-        while (sc.hasNext()) {
+        while (sc.hasNextLine()) {
             StringJoiner joiner = new StringJoiner(delimiter);
-            for (int i = 0; i < columns.length; i++) {
-                token = sc.next().trim();
-                if (filter.contains(columns[i])) {
-                    joiner.add(token);
-                }
+            String[] namesColumns = sc.nextLine().split(delimiter);
+            for (Integer indexFilter : listIndexses) {
+                joiner.add(namesColumns[indexFilter]);
             }
             line.add(joiner.toString());
         }
