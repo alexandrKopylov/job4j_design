@@ -25,7 +25,8 @@ public class Person {
     @XmlElement(name = "status")
     private String[] statuses;
 
-    public Person() { }
+    public Person() {
+    }
 
     public Person(boolean sex, int age, Contact contact, String... statuses) {
         this.sex = sex;
@@ -45,7 +46,6 @@ public class Person {
     }
 
 
-
     public static void main(String[] args) throws JAXBException {
 
         final Person person = new Person(false, 30, new Contact("11-111"), "Worker", "Married");
@@ -62,26 +62,23 @@ public class Person {
             e.printStackTrace();
         }
 
-        String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                "<person sex=\"false\" age=\"30\">\n" +
-                "    <contact phone=\"11-111\"/>\n" +
-                "    <statuses>\n" +
-                "        <status>Worker</status>\n" +
-                "        <status>Married</status>\n" +
-                "    </statuses>\n" +
-                "</person>";
+        String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
+                + "<person sex=\"false\" age=\"30\">\n"
+                + "    <contact phone=\"11-111\"/>\n"
+                + "    <statuses>\n"
+                + "        <status>Worker</status>\n"
+                + "        <status>Married</status>\n"
+                + "    </statuses>\n"
+                + "</person>";
         // Для десериализации нам нужно создать десериализатор
         Unmarshaller unmarshaller = context.createUnmarshaller();
         try (StringReader reader = new StringReader(xml)) {
             // десериализуем
             Person result = (Person) unmarshaller.unmarshal(reader);
             System.out.println(result);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
-
 
 
     }

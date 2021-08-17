@@ -7,15 +7,15 @@ public class WorkSLF4J {
     private static final Logger LOG = LoggerFactory.getLogger(UsageLog4j.class.getName());
 
     public static void main(String[] args) {
-        boolean BOOLEAN = false;
-        byte BYTE = 1;
-        short SHORT = 2;
-        int INT = 3;
-        long LONG = 4;
-        double DOUBLE = 5.5;
-        float FLOAT = 6.5F;
-        char CHAR = '+';
+        boolean bool = false;
+        byte b = 1;
+        short shortt = 2;
+        int i = 3;
+        long l = 4;
+        double doubl = 5.5;
+        float floatt = 6.5F;
+        char c = '+';
         LOG.debug("primitives : {}, {}, {}, {}, {}, {}, {}, {}",
-                BOOLEAN, BYTE, SHORT, INT, LONG, DOUBLE, FLOAT, CHAR);
+                bool, b, shortt, i, l, doubl, floatt, c);
     }
 }

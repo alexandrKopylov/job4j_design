@@ -1,4 +1,4 @@
-package ru.job4j.block2.io.serialization.jsonToPojo;
+package ru.job4j.block2.io.serialization.jsontopojo;
 
 public class Contact {
     private final String phone;

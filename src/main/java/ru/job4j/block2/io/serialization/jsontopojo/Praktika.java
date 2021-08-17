@@ -1,8 +1,8 @@
-package ru.job4j.block2.io.serialization.jsonToPojo;
+package ru.job4j.block2.io.serialization.jsontopojo;
 
 public class Praktika {
-    String factory ;
-    int anne ;
+    String factory;
+    int anne;
 
 
     public Praktika(String factory, int anne) {
@@ -20,9 +20,9 @@ public class Praktika {
 
     @Override
     public String toString() {
-        return "Praktika{" +
-                "factory='" + factory + '\'' +
-                ", anne=" + anne +
-                '}';
+        return "Praktika{"
+                +                "factory='" + factory + '\''
+                +                ", anne=" + anne
+                +                '}';
     }
 }

@@ -7,10 +7,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Praktika {
 
     @XmlAttribute
-    String factory ;
-    int age ;
+    String factory;
+    int age;
 
-    public Praktika(){
+    public Praktika() {
     }
 
     public Praktika(String factory, int age) {
@@ -20,9 +20,9 @@ public class Praktika {
 
     @Override
     public String toString() {
-        return "Praktika{" +
-                "factory='" + factory + '\'' +
-                ", age=" + age +
-                '}';
+        return "Praktika{"
+                + "factory='" + factory + '\''
+                + ", age=" + age
+                + '}';
     }
 }

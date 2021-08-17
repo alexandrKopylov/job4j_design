@@ -15,20 +15,21 @@ import java.io.StringWriter;
 public class Student {
 
     @XmlAttribute
-   private boolean isday;
+    private boolean isday;
 
     @XmlAttribute
-   private int age;
+    private int age;
 
     @XmlAttribute
-   private String name;
+    private String name;
 
 
-   private Praktika praktika;
+    private Praktika praktika;
 
     String[] language;
 
-    public Student(){ }
+    public Student() {
+    }
 
     public Student(boolean isday, int age, String name, Praktika praktika, String... language) {
         this.isday = isday;
@@ -41,18 +42,18 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" +
-                "isday=" + isday +
-                ", age=" + age +
-                ", name='" + name + '\'' +
-                ", praktika=" + praktika +
-                ", language=" + Arrays.toString(language) +
-                '}';
+        return "Student{"
+                + "isday=" + isday
+                + ", age=" + age
+                + ", name='" + name + '\''
+                + ", praktika=" + praktika
+                + ", language=" + Arrays.toString(language)
+                + '}';
     }
 
     public static void main(String[] args) throws JAXBException {
 
-        final Student stud = new Student(true, 22, "Sasha", new Praktika("kmz",22), "java", "python","c++");
+        final Student stud = new Student(true, 22, "Sasha", new Praktika("kmz", 22), "java", "python", "c++");
 
         JAXBContext context = JAXBContext.newInstance(Student.class);
 
@@ -67,12 +68,18 @@ public class Student {
             e.printStackTrace();
         }
 
-        String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                "<student isday=\"true\" age=\"22\" name=\"Sasha\">\n" +
-                "    <praktika factory=\"kmz\"/>\n" +
-                "    <language>java</language>\n" +
-                "    <language>python</language>\n" +
-                "    <language>c++</language>\n" +
+        String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
+                +
+                "<student isday=\"true\" age=\"22\" name=\"Sasha\">\n"
+                +
+                "    <praktika factory=\"kmz\"/>\n"
+                +
+                "    <language>java</language>\n"
+                +
+                "    <language>python</language>\n"
+                +
+                "    <language>c++</language>\n"
+                +
                 "</student>\n";
         // Для десериализации нам нужно создать десериализатор
         Unmarshaller unmarshaller = context.createUnmarshaller();
@@ -80,12 +87,9 @@ public class Student {
             // десериализуем
             Student result = (Student) unmarshaller.unmarshal(reader);
             System.out.println(result);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
-
 
 
     }

@@ -1,4 +1,4 @@
-package ru.job4j.block2.io.serialization.jsonToPojo;
+package ru.job4j.block2.io.serialization.jsontopojo;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -45,13 +45,13 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" +
-                "isday=" + isday +
-                ", age=" + age +
-                ", name='" + name + '\'' +
-                ", praktika=" + praktika +
-                ", language=" + Arrays.toString(language) +
-                '}';
+        return "Student{"
+                +                "isday=" + isday
+                +                ", age=" + age
+                +                ", name='" + name + '\''
+                +                ", praktika=" + praktika
+                +                ", language=" + Arrays.toString(language)
+                +                '}';
     }
 
     public static void main(String[] args) {
