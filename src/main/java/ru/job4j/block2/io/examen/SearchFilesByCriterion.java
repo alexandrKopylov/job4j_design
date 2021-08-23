@@ -34,40 +34,47 @@ public class SearchFilesByCriterion {
         String fileLog = csvArgs.get("o");
 
         sfc.validation(startSearch, typeSearch, fileLog);
-        Pattern pattern = sfc.getPattern(name, typeSearch);
+        Pattern pattern = sfc.getPattern(name, typeSearch );
         sfc.search(startSearch, pattern);
         sfc.writeLog(fileLog);
 
     }
 
     private void writeLog(String out) {
-        StringJoiner lines = new StringJoiner(System.lineSeparator());
-        for (String s : list) {
-            lines.add(s);
-        }
         try (PrintWriter pw = new PrintWriter(new FileWriter(out, StandardCharsets.UTF_8, false))) {
-            pw.write(lines.toString());
+            for (String s :list) {
+                pw.println(s);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     private Pattern getPattern(String name, String typeSearch) {
+        StringBuilder sb = new StringBuilder();
         if (typeSearch.equals("mask")) {
-            name = name.replace("*", "");
+            for (int i = 0; i < name.length(); i++) {
+                char c = name.charAt(i);
+                if (c == '*') {
+                    sb.append(".*");
+                } else if (c == '.') {
+                    sb.append("\\.");
+                } else {
+                    sb.append(c);
+                }
+            }
         }
         if (typeSearch.equals("name")) {
-            name = "^" + name + "$";
+            sb.append("^").append(name).append("$");
         }
-        Pattern ptn = Pattern.compile(name);
-        return ptn;
+        return Pattern.compile(sb.toString());
     }
 
     private void search(String startSearch, Pattern ptn) {
         File folder = new File(startSearch);
         for (File subfile : folder.listFiles()) {
             if (subfile.isDirectory()) {
-                search(startSearch + "\\" + subfile.getName(), ptn);
+                search(startSearch + File.separator + subfile.getName(), ptn);
             } else {
                 Matcher matcher = ptn.matcher(subfile.getName());
                 if (matcher.find()) {
