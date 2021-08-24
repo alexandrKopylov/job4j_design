@@ -34,7 +34,7 @@ public class SearchFilesByCriterion {
         String fileLog = csvArgs.get("o");
 
         sfc.validation(startSearch, typeSearch, fileLog);
-        Pattern pattern = sfc.getPattern(name, typeSearch );
+        Pattern pattern = sfc.getPattern(name, typeSearch);
         sfc.search(startSearch, pattern);
         sfc.writeLog(fileLog);
 
@@ -42,7 +42,7 @@ public class SearchFilesByCriterion {
 
     private void writeLog(String out) {
         try (PrintWriter pw = new PrintWriter(new FileWriter(out, StandardCharsets.UTF_8, false))) {
-            for (String s :list) {
+            for (String s : list) {
                 pw.println(s);
             }
         } catch (IOException e) {
@@ -103,10 +103,6 @@ public class SearchFilesByCriterion {
         if (!"mask name regex".contains(typeSearch)) {
             throw new IllegalArgumentException("wrong parametr -n (only  'mask' or  'name' or 'regex') ");
         }
-
-
     }
-
-
 }
 
