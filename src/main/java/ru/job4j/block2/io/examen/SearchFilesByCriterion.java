@@ -2,27 +2,29 @@ package ru.job4j.block2.io.examen;
 
 
 import ru.job4j.block2.io.ArgsName;
+import ru.job4j.block2.io.SearchFiles;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringJoiner;
-import java.util.regex.Matcher;
+
 import java.util.regex.Pattern;
 
 public class SearchFilesByCriterion {
-
-    List<String> list;
+    List<Path> list;
 
     public SearchFilesByCriterion() {
         this.list = new ArrayList<>();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         if (args.length != 4) {
             throw new IllegalArgumentException("wrong count arguments (there should be 4 arguments)");
         }
@@ -32,57 +34,27 @@ public class SearchFilesByCriterion {
         String name = csvArgs.get("n");
         String typeSearch = csvArgs.get("t");
         String fileLog = csvArgs.get("o");
-
         sfc.validation(startSearch, typeSearch, fileLog);
-        Pattern pattern = sfc.getPattern(name, typeSearch);
-        sfc.search(startSearch, pattern);
+        Search sch = SearchFactory.createSearch(typeSearch, name);
+        assert sch != null;
+        sfc.list = sfc.search(Paths.get(startSearch), sch.getSearchPattern());
         sfc.writeLog(fileLog);
-
     }
 
     private void writeLog(String out) {
         try (PrintWriter pw = new PrintWriter(new FileWriter(out, StandardCharsets.UTF_8, false))) {
-            for (String s : list) {
-                pw.println(s);
+            for (Path s : list) {
+                pw.println(s.toString());
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private Pattern getPattern(String name, String typeSearch) {
-        StringBuilder sb = new StringBuilder();
-        if (typeSearch.equals("mask")) {
-            for (int i = 0; i < name.length(); i++) {
-                char c = name.charAt(i);
-                if (c == '*') {
-                    sb.append(".*");
-                } else if (c == '.') {
-                    sb.append("\\.");
-                } else {
-                    sb.append(c);
-                }
-            }
-        }
-        if (typeSearch.equals("name")) {
-            sb.append("^").append(name).append("$");
-        }
-        return Pattern.compile(sb.toString());
-    }
-
-    private void search(String startSearch, Pattern ptn) {
-        File folder = new File(startSearch);
-        for (File subfile : folder.listFiles()) {
-            if (subfile.isDirectory()) {
-                search(startSearch + File.separator + subfile.getName(), ptn);
-            } else {
-                Matcher matcher = ptn.matcher(subfile.getName());
-                if (matcher.find()) {
-                    list.add(subfile.getAbsolutePath());
-                }
-            }
-
-        }
+    public static List<Path> search(Path root, Pattern ptn) throws IOException {
+        SearchVisitor searcher = new SearchVisitor(ptn);
+        Files.walkFileTree(root, searcher);
+        return searcher.getPaths();
     }
 
     private void validation(String path, String typeSearch, String fileLog) {

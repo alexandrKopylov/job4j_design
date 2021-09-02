@@ -11,6 +11,6 @@ public class DuplicatesFinder {
         if (args.length < 1) {
             throw new IllegalArgumentException();
         }
-        Files.walkFileTree(Path.of(args[0]), new DuplicatesVisitor());
+        Files.walkFileTree(Path.of(args[0]), new DuplicatesVisitor() );
     }
 }
