@@ -1,6 +1,6 @@
 package ru.job4j.block2.io.examen;
 
-        import java.util.regex.Pattern;
+import java.util.regex.Pattern;
 
 public class SearchFullName implements Search {
     String str;
