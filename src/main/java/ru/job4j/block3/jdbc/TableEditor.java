@@ -30,62 +30,48 @@ public class TableEditor implements AutoCloseable {
     }
 
     public void createTable(String tableName) throws Exception {
-        try (Connection connection = this.connection) {
-            try (Statement statement = connection.createStatement()) {
-                String sql = String.format(
-                        "create table if not exists %s ();",
-                        tableName
-                );
-                statement.execute(sql);
-            }
-        }
+        String sql = String.format(
+                " CREATE TABLE IF NOT EXISTS %s ();",
+                tableName
+        );
+        statementExecute(sql);
     }
 
     public void dropTable(String tableName) throws SQLException {
-        try (Connection connection = this.connection) {
-            try (Statement statement = connection.createStatement()) {
-                String sql = String.format(
-                        "DROP TABLE %s;",
-                        tableName
-                );
-                statement.execute(sql);
-            }
-        }
+        String sql = String.format(
+                "DROP TABLE if  exists %s;",
+                tableName
+        );
+        statementExecute(sql);
     }
 
     public void addColumn(String tableName, String columnName, String type) throws SQLException {
-        try (Connection connection = this.connection) {
-            try (Statement statement = connection.createStatement()) {
-                String sql = String.format(
-                        "ALTER TABLE %s ADD %s %s ;",
-                        tableName, columnName, type
-                );
-                statement.execute(sql);
-            }
-        }
+        String sql = String.format(
+                "ALTER TABLE %s ADD COLUMN if not exists %s %s ;",
+                tableName, columnName, type
+        );
+        statementExecute(sql);
     }
 
     public void dropColumn(String tableName, String columnName) throws SQLException {
-        try (Connection connection = this.connection) {
-            try (Statement statement = connection.createStatement()) {
-                String sql = String.format(
-                        " ALTER TABLE %s DROP COLUMN %s;",
-                        tableName, columnName
-                );
-                statement.execute(sql);
-            }
-        }
+        String sql = String.format(
+                " ALTER TABLE %s DROP COLUMN if  exists %s;",
+                tableName, columnName
+        );
+        statementExecute(sql);
     }
 
     public void renameColumn(String tableName, String columnName, String newColumnName) throws SQLException {
-        try (Connection connection = this.connection) {
-            try (Statement statement = connection.createStatement()) {
-                String sql = String.format(
-                        " ALTER TABLE %s RENAME COLUMN %s TO %s;",
-                        tableName, columnName, newColumnName
-                );
-                statement.execute(sql);
-            }
+        String sql = String.format(
+                " ALTER TABLE %s RENAME COLUMN  %s TO %s  ;",
+                tableName, columnName, newColumnName
+        );
+        statementExecute(sql);
+    }
+
+    private void statementExecute(String sql) throws SQLException {
+        try (Statement statement = connection.createStatement()) {
+            statement.execute(sql);
         }
     }
 
@@ -115,4 +101,25 @@ public class TableEditor implements AutoCloseable {
         }
     }
 
+    public static void main(String[] args) throws Exception {
+        Config cfg = new Config("./src/main/resources/app.properties");
+        cfg.load();
+        Properties properties = new Properties();
+        properties.setProperty("url", cfg.value("url"));
+        properties.setProperty("login", cfg.value("login"));
+        properties.setProperty("password", cfg.value("password"));
+
+        TableEditor te = new TableEditor(properties);
+        te.createTable("table1");
+        te.createTable("table2");
+        te.dropTable("table2");
+        te.addColumn("table1", "column1", "varchar(100)");
+        te.addColumn("table1", "column2", "varchar(100)");
+        te.addColumn("table1", "column3", "varchar(100)");
+        te.dropColumn("table1", "column3");
+        te.renameColumn("table1", "column2", "колонка2");
+
+        TableEditor.getTableScheme(te.connection, "table1");
+        te.close();
+    }
 }
