@@ -121,5 +121,6 @@ public class TableEditor implements AutoCloseable {
 
         TableEditor.getTableScheme(te.connection, "table1");
         te.close();
+
     }
 }
