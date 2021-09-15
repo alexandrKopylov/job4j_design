@@ -119,7 +119,7 @@ public class TableEditor implements AutoCloseable {
         te.dropColumn("table1", "column3");
         te.renameColumn("table1", "column2", "колонка2");
 
-        TableEditor.getTableScheme(te.connection, "table1");
+        System.out.println(TableEditor.getTableScheme(te.connection, "table1"));
         te.close();
 
     }
