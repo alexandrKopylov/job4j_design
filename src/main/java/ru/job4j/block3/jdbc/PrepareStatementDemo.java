@@ -37,6 +37,7 @@ public class PrepareStatementDemo {
         }
         return city;
     }
+
     public boolean update(City city) {
         boolean result = false;
         try (PreparedStatement statement =
@@ -62,6 +63,7 @@ public class PrepareStatementDemo {
         }
         return result;
     }
+
     public List<City> findAll() {
         List<City> cities = new ArrayList<>();
         try (PreparedStatement statement = connection.prepareStatement("select * from cities")) {
