@@ -31,44 +31,9 @@ public class GenericUsage {
 
 
     public static void main(String[] args) {
-//        List list = new ArrayList();
-//        list.add("first");
-//        list.add("second");
-//        list.add("third");
-//        list.add(555);
-//        list.add('r');
-//        list.add(5.55467456);
-//       list.add(new Person("name", 21, new Date(913716000000L)));
-//        System.out.println("Количество элементов в списке: " + list.size());
-//
-//       new  GenericUsage().printRsl(list);
-
-
-//        for (int i = 0; i < list.size(); i++) {
-//            String s = (String) list.get(i);
-//            System.out.println("Текущий элемент: " + s);
-//        }
 
 
 
-      //  List<Integer> l = List.of(1, 2, 3, 4, 5);
-      //  new GenericUsage().printRsl(l);
-//
-//        List<Person> per = List.of(new Person("name", 21, new Date(913716000000L)));
-//        new GenericUsage().printInfo(per);
-//
-//        List<Programmer> pro = List.of(new Programmer("name123", 23, new Date(913716000000L)));
-//        new GenericUsage().printInfo(pro);
-
-     //   List<? super Integer> list = new ArrayList<>();
-     //   new GenericUsage().addAll(list);
-
-
-//        GenericsClass<String, String> gen = new GenericsClass<>("First key", "First value");
-//        System.out.println("Вывод в консоль: " + gen);
-//
-//        GenericsClass<Integer, String> second = new GenericsClass<>(12345, "Second value");
-//        System.out.println("Вывод в консоль: " + second);
 
 
         ArrayList<Float> listOfNumbers = new FloatList();

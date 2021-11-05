@@ -126,8 +126,7 @@ public class ForwardLinked<T>  implements Iterable<T> {
         ff.add(3);
         ff.add(4);
         ff.add(5);
-      //  System.out.println("------------------");
-       // System.out.println("head = " + ff.head.value);
+
          ff.printing();
         System.out.println("------------------");
         System.out.println(ff.deleteLast());

@@ -70,10 +70,10 @@ public class Person {
                 + "        <status>Married</status>\n"
                 + "    </statuses>\n"
                 + "</person>";
-        // Для десериализации нам нужно создать десериализатор
+       
         Unmarshaller unmarshaller = context.createUnmarshaller();
         try (StringReader reader = new StringReader(xml)) {
-            // десериализуем
+           
             Person result = (Person) unmarshaller.unmarshal(reader);
             System.out.println(result);
         } catch (Exception e) {

@@ -11,7 +11,7 @@ public class ReadFile {
             while ((read = in.read()) != -1) {
                 text.append((char) read);
             }
-          //  System.out.println(text);
+        
         } catch (Exception e) {
             e.printStackTrace();
         }

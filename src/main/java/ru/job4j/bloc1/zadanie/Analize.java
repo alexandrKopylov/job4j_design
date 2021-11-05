@@ -18,8 +18,6 @@ public class Analize {
         }
 
         for (int keyId : previousMap.keySet()) {
-            // boolean bol1 = ;
-            // boolean bol2 =);
 
             if (currentMap.containsKey(keyId) && !currentMap.get(keyId).contains(previousMap.get(keyId))) {
                 info.changed++;

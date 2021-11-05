@@ -33,7 +33,6 @@ import java.util.*;
  * линейным, или близким к линейному.
  */
 
-//public Map<String, Set<String>> merge(Map<String, Set<String>> data)
 
 public class Task1 {
 

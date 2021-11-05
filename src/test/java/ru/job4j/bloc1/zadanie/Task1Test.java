@@ -45,7 +45,6 @@ public class Task1Test {
 
         assertThat(rsl.get(0).toString(), is("[aaa@bbb.ru, ups@pisem.net, lol@mail.ru, xxx@ya.ru, foo@gmail.com]"));
         assertThat(rsl.get(1).toString(), is("[vasya@pupkin.com, xyz@pisem.net]"));
-//        assertThat(rsl.get(0).size(), is(5));
-//        assertThat(rsl.get(1).size(), is(2));
+
     }
 }

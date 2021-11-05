@@ -10,9 +10,9 @@ import java.util.Scanner;
 public class ConsoleChat {
     private final String path;
     private final String botAnswers;
-    private static final String OUT = "OUT";    //"закончить";
-    private static final String STOP = "STOP";   //"стоп";
-    private static final String CONTINUE = "CONT";    // "продолжить";
+    private static final String OUT = "OUT";    
+    private static final String STOP = "STOP";  
+    private static final String CONTINUE = "CONT";   
 
 
     public ConsoleChat(String path, String botAnswers) {

@@ -81,10 +81,10 @@ public class Student {
                 "    <language>c++</language>\n"
                 +
                 "</student>\n";
-        // Для десериализации нам нужно создать десериализатор
+        
         Unmarshaller unmarshaller = context.createUnmarshaller();
         try (StringReader reader = new StringReader(xml)) {
-            // десериализуем
+          
             Student result = (Student) unmarshaller.unmarshal(reader);
             System.out.println(result);
         } catch (Exception e) {
