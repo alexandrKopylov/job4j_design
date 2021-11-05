@@ -27,6 +27,7 @@ INSERT INTO person(id, name, company_id) VALUES (7, 'name7', 4), (8, 'name8', 4)
 INSERT INTO person(id, name, company_id) VALUES (11, 'name11', 5), (12, 'name12', 5), (13, 'name13', 5),  (14, 'name14', 5), (15, 'name15', 5);
 INSERT INTO person(id, name, company_id) VALUES (16, 'name11', 6), (17, 'name12', 6), (18, 'name13', 6),  (19, 'name14', 6), (20, 'name15', 6);
 
+
 -- имена всех person, которые не состоят в компании с id = 5;-- название компании для каждого человека.
 select p.name as name_person, c.name as name_company from person as p join company as c  on  p.company_id = c.id
 where p.company_id != 5;
