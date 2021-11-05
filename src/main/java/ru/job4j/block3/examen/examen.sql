@@ -31,6 +31,7 @@ INSERT INTO person(id, name, company_id) VALUES (16, 'name11', 6), (17, 'name12'
 select p.name as name_person, c.name as name_company from person as p join company as c  on  p.company_id = c.id
 where p.company_id != 5;
 
+
 -- Необходимо выбрать название компании с максимальным количеством человек + количество человек в этой компании.
 select c.name as name_company, count(*) as count_person
 from  company as c  join  person as  p
