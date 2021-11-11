@@ -15,7 +15,7 @@ public class ConfigTest {
        
         config.load();
         assertThat(config.value("hibernate.dialect"), is("org.hibernate.dialect.PostgreSQLDialect"));
-        assertThat(config.value("hibernate.connection.url"), is("jdbc:postgresql:
+        assertThat(config.value("hibernate.connection.url"), is("jdbc:postgresql://localhost:5432/idea_db"));
         assertThat(config.value("hibernate.connection.driver_class"), is("org.postgresql.Driver"));
     }
 
