@@ -1,8 +1,8 @@
 package ru.job4j.bloc4.cache;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+        import java.io.IOException;
+        import java.nio.file.Files;
+        import java.nio.file.Paths;
 
 
 public class DirFileCache extends AbstractCache<String, String> {
@@ -23,6 +23,4 @@ public class DirFileCache extends AbstractCache<String, String> {
         return value;
     }
 
-    public static void main(String[] args) {
-    }
 }
