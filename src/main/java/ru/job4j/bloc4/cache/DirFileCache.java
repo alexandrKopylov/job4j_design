@@ -17,9 +17,12 @@ public class DirFileCache extends AbstractCache<String, String> {
     protected String load(String key) throws IOException {
         String value = get(key);
         if (value == null) {
-            value = new String(Files.readAllBytes(Paths.get(cachingDir + "//" + key)));
+            value = new String(Files.readAllBytes(Paths.get(cachingDir + "/" + '/' + key)));
             put(key, value);
         }
         return value;
+    }
+
+    public static void main(String[] args) {
     }
 }
