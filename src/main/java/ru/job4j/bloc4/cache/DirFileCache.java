@@ -1,9 +1,8 @@
 package ru.job4j.bloc4.cache;
 
-        import java.io.IOException;
-        import java.nio.file.Files;
-        import java.nio.file.Paths;
-
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class DirFileCache extends AbstractCache<String, String> {
 
@@ -15,12 +14,6 @@ public class DirFileCache extends AbstractCache<String, String> {
 
     @Override
     protected String load(String key) throws IOException {
-        String value = get(key);
-        if (value == null) {
-            value = new String(Files.readAllBytes(Paths.get(cachingDir + "/" + '/' + key)));
-            put(key, value);
-        }
-        return value;
+        return new String(Files.readAllBytes(Path.of(cachingDir, key)));
     }
-
 }
