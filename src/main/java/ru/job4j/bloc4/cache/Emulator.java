@@ -22,7 +22,8 @@ public class Emulator {
         Emulator emulator = new Emulator();
         emulator.setCacheDirectory("src\\main\\java\\ru\\job4j\\bloc4\\cache");
         emulator.loadCache("Names.txt");
-        System.out.println(emulator.getCache("Names.txt"));
+        String str = emulator.getCache("Names.txt");
+        System.out.println(str);
     }
 }
 
