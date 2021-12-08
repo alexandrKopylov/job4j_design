@@ -1,6 +1,6 @@
 package ru.job4j.bloc4.cache;
 
-import java.io.IOException;
+
 
 public class Emulator {
 
@@ -10,18 +10,19 @@ public class Emulator {
         dirFileCache = new DirFileCache(directory);
     }
 
-    public void loadCache(String fileName) throws IOException {
+    public void loadCache(String fileName)  {
         dirFileCache.load(fileName);
     }
 
-    public String getCache(String fileName) throws IOException {
+    public String getCache(String fileName) {
         return dirFileCache.get(fileName);
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         Emulator emulator = new Emulator();
         emulator.setCacheDirectory("src\\main\\java\\ru\\job4j\\bloc4\\cache");
         emulator.loadCache("Names.txt");
+        emulator.getCache("Names.txt");
         String str = emulator.getCache("Names.txt");
         System.out.println(str);
     }
