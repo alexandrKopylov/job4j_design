@@ -15,10 +15,12 @@ public class PrintFiles implements FileVisitor<Path> {
     private Predicate<Path> predicate;
 
     public PrintFiles(Predicate<Path> predicate) {
+
         this.predicate = predicate;
     }
 
     public List<Path> getPaths() {
+
         return resultList;
     }
 
