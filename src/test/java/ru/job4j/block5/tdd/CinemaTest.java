@@ -40,17 +40,7 @@ public class CinemaTest {
         assertThat(ticket, is(new Ticket3D()));
     }
 
-    @Ignore
-    @Test
-    public void whenNotBuy() {
-        Account account = new AccountCinema();
-        Cinema cinema = new Cinema3D();
-        Calendar date = Calendar.getInstance();
-        date.set(2020, Calendar.DECEMBER, 16, 21, 0);
-        cinema.buy(account, 1, 1, date);
-        Ticket ticket = cinema.buy(account, 1, 1, date);
-        assertNull(ticket);
-    }
+
 
     @Ignore
     @Test
