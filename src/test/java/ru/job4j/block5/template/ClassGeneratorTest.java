@@ -11,8 +11,7 @@ import java.util.Map;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
-public class GeneratorTest {
-    @Ignore
+public class ClassGeneratorTest {
     @Test
     public void whenTemplateWorkCorrect() {
         ClassGenerator cg = new ClassGenerator();
@@ -24,7 +23,6 @@ public class GeneratorTest {
         Assert.assertThat(result, is("I am a Petr Arsentev, Who are you? "));
     }
 
-    @Ignore
     @Test(expected = IllegalArgumentException.class)
     public void whenBadTemplate() {
         ClassGenerator cg = new ClassGenerator();
@@ -34,7 +32,7 @@ public class GeneratorTest {
         map.put("subject", "you");
         String result = cg.produce(template, map);
     }
-    @Ignore
+
     @Test(expected = IllegalArgumentException.class)
     public void whenBadKeyInMap() {
         ClassGenerator cg = new ClassGenerator();
