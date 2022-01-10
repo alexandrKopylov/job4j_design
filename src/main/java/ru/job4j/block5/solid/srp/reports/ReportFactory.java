@@ -1,8 +1,8 @@
 package ru.job4j.block5.solid.srp.reports;
 
-public class ClientReport {
+public class ReportFactory {
 
-    public Report getReport(MemStore store, ReportType reportType, Currency currency) {
+    public static Report getReport(Store store, ReportType reportType, Currency currency) {
         Report report;
         switch (reportType) {
             case HR:

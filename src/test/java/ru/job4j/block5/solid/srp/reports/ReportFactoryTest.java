@@ -7,16 +7,15 @@ import java.util.Calendar;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
-public class ClientReportTest {
+public class ReportFactoryTest {
     @Test
     public void whenOldGenerated() {
-        ClientReport clientReport = new ClientReport();
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
         Employee worker = new Employee("Ivan", now, now, 100);
         store.add(worker);
 
-        Report engine = clientReport.getReport(store, ReportType.OLD, Currency.RUB);
+        Report engine = ReportFactory.getReport(store, ReportType.OLD, Currency.RUB);
         StringBuilder expect = new StringBuilder()
                 .append("Name; Hired; Fired; Salary")
                 .append(System.lineSeparator())
@@ -30,7 +29,6 @@ public class ClientReportTest {
 
     @Test
     public void whenReportHrGenerated() {
-        ClientReport clientReport = new ClientReport();
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
         Employee worker = new Employee("Ivan", now, now, 100);
@@ -40,7 +38,7 @@ public class ClientReportTest {
         Employee worker2 = new Employee("Albert", now, now, 115);
         store.add(worker2);
 
-        Report engine = clientReport.getReport(store, ReportType.HR, Currency.RUB);
+        Report engine = ReportFactory.getReport(store, ReportType.HR, Currency.RUB);
         StringBuilder expect = new StringBuilder()
                 .append("Name; Salary")
                 .append(System.lineSeparator())
@@ -55,13 +53,12 @@ public class ClientReportTest {
 
     @Test
     public void whenReportProgrammerGenerated() {
-        ClientReport clientReport = new ClientReport();
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
         Employee worker = new Employee("Ivan", now, now, 100);
         store.add(worker);
 
-        Report engine = clientReport.getReport(store, ReportType.PROGRAMMER, Currency.RUB);
+        Report engine = ReportFactory.getReport(store, ReportType.PROGRAMMER, Currency.RUB);
         StringBuilder expect = new StringBuilder()
                 .append(" <!DOCTYPE html>")
                 .append("<html>")
@@ -84,13 +81,12 @@ public class ClientReportTest {
 
     @Test
     public void whenReportBookkeepingSalaryInEUR() {
-        ClientReport clientReport = new ClientReport();
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
         Employee worker = new Employee("Ivan", now, now, 100);
         store.add(worker);
 
-        Report engine = clientReport.getReport(store, ReportType.BOOKKEEPING, Currency.EUR);
+        Report engine = ReportFactory.getReport(store, ReportType.BOOKKEEPING, Currency.EUR);
         StringBuilder expect = new StringBuilder()
                 .append("Name; Hired; Fired; Salary")
                 .append(System.lineSeparator())
@@ -104,13 +100,12 @@ public class ClientReportTest {
 
     @Test
     public void whenReportBookkeepingSalaryInUSD() {
-        ClientReport clientReport = new ClientReport();
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
         Employee worker = new Employee("Ivan", now, now, 100);
         store.add(worker);
 
-        Report engine = clientReport.getReport(store, ReportType.BOOKKEEPING, Currency.USD);
+        Report engine = ReportFactory.getReport(store, ReportType.BOOKKEEPING, Currency.USD);
         StringBuilder expect = new StringBuilder()
                 .append("Name; Hired; Fired; Salary")
                 .append(System.lineSeparator())
