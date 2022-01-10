@@ -1,6 +1,7 @@
 package ru.job4j.block5.solid.ocp;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Animal {
     private String name;
@@ -18,7 +19,7 @@ public class Animal {
      * так как, например, при появлении новых видов животных, нам, для того,
      * чтобы с её помощью можно было бы узнавать звуки, издаваемые ими, придётся её изменить.
      */
-    public String animalSound(ArrayList<Animal> animals) {
+    public String animalSound(List<Animal> animals) {
         String str = null;
         for (Animal a : animals) {
             if (a.name.equals("lion")) {

@@ -24,6 +24,6 @@ public class MessageSender {
     }
 }
 
- enum MessageType {
+enum MessageType {
     SMS, EMAIL
- }
+}
