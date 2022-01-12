@@ -1,10 +1,13 @@
-package ru.job4j.block5.solid.srp.reports;
+package ru.job4j.block5.solid.reports;
 
 public class ReportFactory {
 
     public static Report getReport(Store store, ReportType reportType, Currency currency) {
         Report report;
         switch (reportType) {
+            case JSON:
+                report = new ReportJSON(store);
+                break;
             case HR:
                 report = new ReportHR(store);
                 break;

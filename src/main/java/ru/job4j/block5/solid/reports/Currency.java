@@ -1,4 +1,4 @@
-package ru.job4j.block5.solid.srp.reports;
+package ru.job4j.block5.solid.reports;
 
 public enum Currency {
     RUB(1.0), EUR(84.0), USD(74.0);

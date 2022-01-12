@@ -1,4 +1,4 @@
-package ru.job4j.block5.solid.srp.reports;
+package ru.job4j.block5.solid.reports;
 
 import java.util.Calendar;
 import java.util.Objects;
@@ -68,8 +68,8 @@ public class Employee {
     @Override
     public String toString() {
         return "Employee{"
-                +  "name='" + name + '\'' +  ", hired=" + hired.getTime()
-                +  ", fired=" + fired.getTime()
+                +  "name='" + name + '\'' +  ", hired=" + hired //.getTime()
+                +  ", fired=" + fired //.getTime()
                 + ", salary=" + salary   + '}';
     }
 }

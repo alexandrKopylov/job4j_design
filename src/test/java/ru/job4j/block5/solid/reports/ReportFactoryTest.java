@@ -1,4 +1,4 @@
-package ru.job4j.block5.solid.srp.reports;
+package ru.job4j.block5.solid.reports;
 
 import org.junit.Test;
 
@@ -8,6 +8,49 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
 public class ReportFactoryTest {
+
+    @Test
+    public void whenReportJSON() {
+        MemStore store = new MemStore();
+        Calendar now = Calendar.getInstance();
+        Employee worker = new Employee("Ivan", now, now, 100);
+        store.add(worker);
+
+        Report engine = ReportFactory.getReport(store, ReportType.JSON, Currency.RUB);
+        StringBuilder expect = new StringBuilder()
+                .append("{\"name\":\"")
+                .append(worker.getName())
+                .append("\",\"hired\":{\"year\":")
+                .append(now.get(Calendar.YEAR))
+                .append(",\"month\":")
+                .append(now.get(Calendar.MONTH))
+                .append(",\"dayOfMonth\":")
+                .append(now.get(Calendar.DAY_OF_MONTH))
+                .append(",\"hourOfDay\":")
+                .append(now.get(Calendar.HOUR))
+                .append(",\"minute\":")
+                .append(now.get(Calendar.MINUTE))
+                .append(",\"second\":")
+                .append(now.get(Calendar.SECOND))
+                .append("},\"fired\":{\"year\":")
+                .append(now.get(Calendar.YEAR))
+                .append(",\"month\":")
+                .append(now.get(Calendar.MONTH))
+                .append(",\"dayOfMonth\":")
+                .append(now.get(Calendar.DAY_OF_MONTH))
+                .append(",\"hourOfDay\":")
+                .append(now.get(Calendar.HOUR))
+                .append(",\"minute\":")
+                .append(now.get(Calendar.MINUTE))
+                .append(",\"second\":")
+                .append(now.get(Calendar.SECOND))
+                .append("},\"salary\":")
+                .append(worker.getSalary())
+                .append("}")
+                .append(System.lineSeparator());
+        assertThat(engine.generate(em -> true), is(expect.toString()));
+    }
+
     @Test
     public void whenOldGenerated() {
         MemStore store = new MemStore();
