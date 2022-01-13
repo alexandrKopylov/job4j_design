@@ -3,11 +3,26 @@ package ru.job4j.block5.solid.reports;
 import java.util.Calendar;
 import java.util.Objects;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.annotation.*;
+
+
+@XmlRootElement   //(name = "employee")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Employee {
+    @XmlAttribute
     private String name;
+    @XmlAttribute
     private Calendar hired;
+    @XmlAttribute
     private Calendar fired;
+    @XmlAttribute
     private double salary;
+
+    public Employee() {
+    }
 
     public Employee(String name, Calendar hired, Calendar fired, double salary) {
         this.name = name;
@@ -68,8 +83,8 @@ public class Employee {
     @Override
     public String toString() {
         return "Employee{"
-                +  "name='" + name + '\'' +  ", hired=" + hired //.getTime()
-                +  ", fired=" + fired //.getTime()
+                +  "name='" + name + '\'' +  ", hired=" + hired.getTime()
+                +  ", fired=" + fired.getTime()
                 + ", salary=" + salary   + '}';
     }
 }

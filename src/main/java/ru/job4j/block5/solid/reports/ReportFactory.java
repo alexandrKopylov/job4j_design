@@ -5,6 +5,9 @@ public class ReportFactory {
     public static Report getReport(Store store, ReportType reportType, Currency currency) {
         Report report;
         switch (reportType) {
+            case XML:
+                report = new ReportXML(store);
+                break;
             case JSON:
                 report = new ReportJSON(store);
                 break;

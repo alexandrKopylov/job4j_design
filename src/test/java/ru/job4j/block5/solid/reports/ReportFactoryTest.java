@@ -2,7 +2,10 @@ package ru.job4j.block5.solid.reports;
 
 import org.junit.Test;
 
+import javax.xml.bind.JAXBException;
+import java.time.ZoneId;
 import java.util.Calendar;
+import java.util.TimeZone;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
@@ -10,7 +13,35 @@ import static org.junit.Assert.*;
 public class ReportFactoryTest {
 
     @Test
-    public void whenReportJSON() {
+    public void whenReportXML() throws JAXBException {
+        MemStore store = new MemStore();
+        Calendar now = Calendar.getInstance();
+        Employee worker = new Employee("Ivan", now, now, 100);
+        store.add(worker);
+
+        Report engine = ReportFactory.getReport(store, ReportType.XML, Currency.RUB);
+        StringBuilder expect = new StringBuilder()
+             .append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>")
+             .append("\n")
+                .append("<employee name=\"")
+                .append(worker.getName())
+                .append("\" hired=\"")
+                .append(ReportXML.toLocalDateTime(now))
+                .append("+05:00")
+                .append("\" fired=\"")
+                .append(ReportXML.toLocalDateTime(now))
+                .append("+05:00")
+                .append("\" salary=\"")
+                .append(worker.getSalary())
+                .append("\"/>")
+                .append("\n")
+                .append(System.lineSeparator());
+       assertThat(engine.generate(em -> true), is(expect.toString()));
+    }
+
+
+    @Test
+    public void whenReportJSON() throws JAXBException {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
         Employee worker = new Employee("Ivan", now, now, 100);
@@ -27,7 +58,7 @@ public class ReportFactoryTest {
                 .append(",\"dayOfMonth\":")
                 .append(now.get(Calendar.DAY_OF_MONTH))
                 .append(",\"hourOfDay\":")
-                .append(now.get(Calendar.HOUR))
+                .append(now.get(Calendar.HOUR_OF_DAY))
                 .append(",\"minute\":")
                 .append(now.get(Calendar.MINUTE))
                 .append(",\"second\":")
@@ -39,7 +70,7 @@ public class ReportFactoryTest {
                 .append(",\"dayOfMonth\":")
                 .append(now.get(Calendar.DAY_OF_MONTH))
                 .append(",\"hourOfDay\":")
-                .append(now.get(Calendar.HOUR))
+                .append(now.get(Calendar.HOUR_OF_DAY))
                 .append(",\"minute\":")
                 .append(now.get(Calendar.MINUTE))
                 .append(",\"second\":")
@@ -52,7 +83,7 @@ public class ReportFactoryTest {
     }
 
     @Test
-    public void whenOldGenerated() {
+    public void whenOldGenerated() throws JAXBException {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
         Employee worker = new Employee("Ivan", now, now, 100);
@@ -71,7 +102,7 @@ public class ReportFactoryTest {
     }
 
     @Test
-    public void whenReportHrGenerated() {
+    public void whenReportHrGenerated() throws JAXBException {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
         Employee worker = new Employee("Ivan", now, now, 100);
@@ -95,7 +126,7 @@ public class ReportFactoryTest {
     }
 
     @Test
-    public void whenReportProgrammerGenerated() {
+    public void whenReportProgrammerGenerated() throws JAXBException {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
         Employee worker = new Employee("Ivan", now, now, 100);
@@ -123,7 +154,7 @@ public class ReportFactoryTest {
     }
 
     @Test
-    public void whenReportBookkeepingSalaryInEUR() {
+    public void whenReportBookkeepingSalaryInEUR() throws JAXBException {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
         Employee worker = new Employee("Ivan", now, now, 100);
@@ -142,7 +173,7 @@ public class ReportFactoryTest {
     }
 
     @Test
-    public void whenReportBookkeepingSalaryInUSD() {
+    public void whenReportBookkeepingSalaryInUSD() throws JAXBException {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
         Employee worker = new Employee("Ivan", now, now, 100);
