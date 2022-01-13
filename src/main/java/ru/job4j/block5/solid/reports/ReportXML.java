@@ -28,13 +28,11 @@ public class ReportXML implements Report {
 
         StringBuilder text = new StringBuilder();
         for (Employee employee : store.findBy(filter)) {
-
             try (StringWriter writer = new StringWriter()) {
                 marshaller.marshal(employee, writer);
                 String result = writer.getBuffer().toString();
                 text.append(result)
                         .append(System.lineSeparator());
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -50,6 +48,4 @@ public class ReportXML implements Report {
         ZoneId zid = tz == null ? ZoneId.systemDefault() : tz.toZoneId();
         return LocalDateTime.ofInstant(calendar.toInstant(), zid);
     }
-
-
 }

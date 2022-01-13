@@ -9,7 +9,7 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.annotation.*;
 
 
-@XmlRootElement   //(name = "employee")
+@XmlRootElement(name = "employee")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Employee {
     @XmlAttribute
