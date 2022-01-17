@@ -4,7 +4,9 @@ import org.junit.Test;
 
 import javax.xml.bind.JAXBException;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
 import static org.hamcrest.Matchers.is;
@@ -43,11 +45,24 @@ public class ReportFactoryTest {
     @Test
     public void whenReportJSON() throws JAXBException {
         MemStore store = new MemStore();
-        Calendar now = Calendar.getInstance();
+       // Calendar now = Calendar.getInstance();
+
+       Calendar now = new GregorianCalendar(2022, Calendar.JANUARY, 17);
+       now.setTimeZone(TimeZone.getTimeZone(ZoneOffset.of("+3")));
+
+
+
         Employee worker = new Employee("Ivan", now, now, 100);
         store.add(worker);
+        Employee worker2 = new Employee("Ivan2", now, now, 100);
+        store.add(worker2);
+        Employee worker3 = new Employee("Ivan3", now, now, 100);
+        store.add(worker3);
 
         Report engine = ReportFactory.getReport(store, ReportType.JSON, Currency.RUB);
+        System.out.println(engine.generate(em ->true));
+
+    /*    Report engine = ReportFactory.getReport(store, ReportType.JSON, Currency.RUB);
         StringBuilder expect = new StringBuilder()
                 .append("{\"name\":\"")
                 .append(worker.getName())
@@ -79,7 +94,15 @@ public class ReportFactoryTest {
                 .append(worker.getSalary())
                 .append("}")
                 .append(System.lineSeparator());
+
+
+
         assertThat(engine.generate(em -> true), is(expect.toString()));
+
+     */
+
+
+
     }
 
     @Test

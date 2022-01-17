@@ -14,12 +14,22 @@ public class ReportJSON implements Report {
 
     @Override
     public String generate(Predicate<Employee> filter) {
+
         final Gson gson = new GsonBuilder().create();
-        StringBuilder text = new StringBuilder();
-        for (Employee employee : store.findBy(filter)) {
-            text.append(gson.toJson(employee))
-                    .append(System.lineSeparator());
-        }
-        return text.toString();
+        StringBuilder textJSON = new StringBuilder();
+        store.findBy(filter).forEach(x -> textJSON.append(gson.toJson(x)).append(System.lineSeparator()));
+        return textJSON.toString();
+    }
+
+    public static void main(String[] args) {
+        var store = new MemStore();
+
+        store.add(new Employee("vasya", null, null, 111));
+        store.add(new Employee("kuzya", null, null, 333));
+        store.add(new Employee("fedya", null, null, 100));
+        ReportJSON rj = new ReportJSON(store);
+        System.out.println(rj.generate(x -> true));
+
+
     }
 }
