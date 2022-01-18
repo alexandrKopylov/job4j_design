@@ -9,16 +9,10 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.annotation.*;
 
 
-@XmlRootElement(name = "employee")
-@XmlAccessorType(XmlAccessType.FIELD)
 public class Employee {
-    @XmlAttribute
     private String name;
-    @XmlAttribute
     private Calendar hired;
-    @XmlAttribute
     private Calendar fired;
-    @XmlAttribute
     private double salary;
 
     public Employee() {

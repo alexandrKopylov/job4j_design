@@ -5,6 +5,7 @@ import org.junit.Test;
 import javax.xml.bind.JAXBException;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
@@ -17,52 +18,70 @@ public class ReportFactoryTest {
     @Test
     public void whenReportXML() throws JAXBException {
         MemStore store = new MemStore();
-        Calendar now = Calendar.getInstance();
+        Calendar now = new GregorianCalendar(2022, Calendar.JANUARY, 17);
+        now.setTimeZone(TimeZone.getTimeZone(ZoneOffset.of("+3")));
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+//        DateTimeFormatter rrr = now.getTime();
+//
+//        String currentDateTimeFormat = now.getTime().format(formatter);
+//        System.out.println(now.getTime());
+
         Employee worker = new Employee("Ivan", now, now, 100);
         store.add(worker);
 
         Report engine = ReportFactory.getReport(store, ReportType.XML, Currency.RUB);
-        StringBuilder expect = new StringBuilder()
+        String except = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
+                + "<emploeeList>\n"
+                + "    <empList>\n"
+                + "        <fired>" + now.get(Calendar.YEAR)+"-0"
+                +                     now.get(Calendar.MONTH)+"-"
+                +                     now.get(Calendar.DAY_OF_MONTH) + "</fired>\n"
+                + "        <hired>" + now.getTime().toString() + "</hired>\n"
+                + "        <name>" + worker.getName() + "</name>\n"
+                + "        <salary>" + worker.getSalary() + "</salary>\n"
+                + "    </empList>\n"
+                + "</employeeList>\n";
+     /*
+           StringBuilder expect = new StringBuilder()
              .append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>")
              .append("\n")
-                .append("<employee name=\"")
+                .append("<employeeList>")
+                   .append(System.lineSeparator())
                 .append(worker.getName())
                 .append("\" hired=\"")
-                .append(ReportXML.toLocalDateTime(now))
-                .append("+05:00")
+                .append(now.getTime())
+                .append(now.getTimeZone())
                 .append("\" fired=\"")
-                .append(ReportXML.toLocalDateTime(now))
-                .append("+05:00")
+                   .append(now.getTime())
+                   .append(now.getTimeZone())
                 .append("\" salary=\"")
                 .append(worker.getSalary())
                 .append("\"/>")
                 .append("\n")
                 .append(System.lineSeparator());
-       assertThat(engine.generate(em -> true), is(expect.toString()));
+           */
+
+
+       assertThat(engine.generate(em -> true), is(except));
+
+
+
+
     }
 
 
     @Test
     public void whenReportJSON() throws JAXBException {
         MemStore store = new MemStore();
-       // Calendar now = Calendar.getInstance();
-
        Calendar now = new GregorianCalendar(2022, Calendar.JANUARY, 17);
-       now.setTimeZone(TimeZone.getTimeZone(ZoneOffset.of("+3")));
 
-
+      // now.setTimeZone(TimeZone.getTimeZone(ZoneOffset.of("+3")));
 
         Employee worker = new Employee("Ivan", now, now, 100);
         store.add(worker);
-        Employee worker2 = new Employee("Ivan2", now, now, 100);
-        store.add(worker2);
-        Employee worker3 = new Employee("Ivan3", now, now, 100);
-        store.add(worker3);
+
 
         Report engine = ReportFactory.getReport(store, ReportType.JSON, Currency.RUB);
-        System.out.println(engine.generate(em ->true));
-
-    /*    Report engine = ReportFactory.getReport(store, ReportType.JSON, Currency.RUB);
         StringBuilder expect = new StringBuilder()
                 .append("{\"name\":\"")
                 .append(worker.getName())
@@ -95,14 +114,7 @@ public class ReportFactoryTest {
                 .append("}")
                 .append(System.lineSeparator());
 
-
-
         assertThat(engine.generate(em -> true), is(expect.toString()));
-
-     */
-
-
-
     }
 
     @Test
