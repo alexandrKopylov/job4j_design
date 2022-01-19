@@ -3,6 +3,7 @@ package ru.job4j.block5.solid.reports;
 import org.junit.Test;
 
 import javax.xml.bind.JAXBException;
+import java.text.SimpleDateFormat;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
@@ -20,62 +21,31 @@ public class ReportFactoryTest {
         MemStore store = new MemStore();
         Calendar now = new GregorianCalendar(2022, Calendar.JANUARY, 17);
         now.setTimeZone(TimeZone.getTimeZone(ZoneOffset.of("+3")));
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-//        DateTimeFormatter rrr = now.getTime();
-//
-//        String currentDateTimeFormat = now.getTime().format(formatter);
-//        System.out.println(now.getTime());
+        String textDate = new SimpleDateFormat("yyyy-MM-dd").format(now.getTime());
 
         Employee worker = new Employee("Ivan", now, now, 100);
         store.add(worker);
 
         Report engine = ReportFactory.getReport(store, ReportType.XML, Currency.RUB);
-        String except = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
-                + "<emploeeList>\n"
-                + "    <empList>\n"
-                + "        <fired>" + now.get(Calendar.YEAR)+"-0"
-                +                     now.get(Calendar.MONTH)+"-"
-                +                     now.get(Calendar.DAY_OF_MONTH) + "</fired>\n"
-                + "        <hired>" + now.getTime().toString() + "</hired>\n"
-                + "        <name>" + worker.getName() + "</name>\n"
-                + "        <salary>" + worker.getSalary() + "</salary>\n"
-                + "    </empList>\n"
-                + "</employeeList>\n";
-     /*
-           StringBuilder expect = new StringBuilder()
-             .append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>")
-             .append("\n")
-                .append("<employeeList>")
-                   .append(System.lineSeparator())
-                .append(worker.getName())
-                .append("\" hired=\"")
-                .append(now.getTime())
-                .append(now.getTimeZone())
-                .append("\" fired=\"")
-                   .append(now.getTime())
-                   .append(now.getTimeZone())
-                .append("\" salary=\"")
-                .append(worker.getSalary())
-                .append("\"/>")
-                .append("\n")
-                .append(System.lineSeparator());
-           */
-
-
-       assertThat(engine.generate(em -> true), is(except));
-
-
-
-
+        StringBuilder expect = new StringBuilder()
+                .append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n")
+                .append("<employeesList>\n")
+                .append("    <empList>\n")
+                .append("        <fired>").append(textDate).append("T00:00:00+03:00</fired>\n")
+                .append("        <hired>").append(textDate).append("T00:00:00+03:00</hired>\n")
+                .append("        <name>").append(worker.getName()).append("</name>\n")
+                .append("        <salary>").append(worker.getSalary()).append("</salary>\n")
+                .append("    </empList>\n")
+                .append("</employeesList>\n");
+        assertThat(engine.generate(em -> true), is(expect.toString()));
     }
 
 
     @Test
     public void whenReportJSON() throws JAXBException {
         MemStore store = new MemStore();
-       Calendar now = new GregorianCalendar(2022, Calendar.JANUARY, 17);
-
-      // now.setTimeZone(TimeZone.getTimeZone(ZoneOffset.of("+3")));
+        Calendar now = new GregorianCalendar(2022, Calendar.JANUARY, 17);
+        now.setTimeZone(TimeZone.getTimeZone(ZoneOffset.of("+3")));
 
         Employee worker = new Employee("Ivan", now, now, 100);
         store.add(worker);
