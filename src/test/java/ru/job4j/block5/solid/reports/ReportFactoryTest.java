@@ -21,8 +21,9 @@ public class ReportFactoryTest {
         MemStore store = new MemStore();
         Calendar now = new GregorianCalendar(2022, Calendar.JANUARY, 17);
         now.setTimeZone(TimeZone.getTimeZone(ZoneOffset.of("+3")));
-        String textDate = new SimpleDateFormat("yyyy-MM-dd").format(now.getTime());
-
+       /**
+        * String textDate = new SimpleDateFormat("yyyy-MM-dd").format(now.getTime());
+        */
         Employee worker = new Employee("Ivan", now, now, 100);
         store.add(worker);
 
@@ -31,8 +32,12 @@ public class ReportFactoryTest {
                 .append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n")
                 .append("<employeesList>\n")
                 .append("    <empList>\n")
-                .append("        <fired>").append(textDate).append("T00:00:00+03:00</fired>\n")
-                .append("        <hired>").append(textDate).append("T00:00:00+03:00</hired>\n")
+                /**
+                *  .append("        <fired>").append(textDate).append("T00:00:00+03:00</fired>\n")
+                * .append("        <hired>").append(textDate).append("T00:00:00+03:00</hired>\n")
+                 */
+                .append("        <fired>").append(now).append("</fired>\n")
+                .append("        <hired>").append(now).append("</hired>\n")
                 .append("        <name>").append(worker.getName()).append("</name>\n")
                 .append("        <salary>").append(worker.getSalary()).append("</salary>\n")
                 .append("    </empList>\n")
@@ -53,7 +58,7 @@ public class ReportFactoryTest {
 
         Report engine = ReportFactory.getReport(store, ReportType.JSON, Currency.RUB);
         StringBuilder expect = new StringBuilder()
-                .append("{\"name\":\"")
+                .append("[{\"name\":\"")
                 .append(worker.getName())
                 .append("\",\"hired\":{\"year\":")
                 .append(now.get(Calendar.YEAR))
@@ -81,8 +86,8 @@ public class ReportFactoryTest {
                 .append(now.get(Calendar.SECOND))
                 .append("},\"salary\":")
                 .append(worker.getSalary())
-                .append("}")
-                .append(System.lineSeparator());
+                .append("}]");
+
 
         assertThat(engine.generate(em -> true), is(expect.toString()));
     }

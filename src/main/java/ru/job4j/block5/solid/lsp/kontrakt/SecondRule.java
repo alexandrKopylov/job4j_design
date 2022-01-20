@@ -79,7 +79,10 @@ class ShopCountingRoom extends CountingRoom {
 
 public class SecondRule {
     public static void main(String[] args) {
-
+/**
+ * Правила 1-2 не распространяются на приватные поля, т.е. когда вы проверяете специфичные только для объекта поля,
+ * то вы не нарушаете эти правила. Принцип Лисков контролирует отношения между классами при наследовании.
+ */
         WorkDays workDays = new WorkDays();
         workDays.add(LocalDate.of(2020, Month.DECEMBER, 1), 8);
         workDays.add(LocalDate.of(2020, Month.DECEMBER, 2), 6);
