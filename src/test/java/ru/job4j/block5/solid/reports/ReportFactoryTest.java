@@ -36,8 +36,8 @@ public class ReportFactoryTest {
                 *  .append("        <fired>").append(textDate).append("T00:00:00+03:00</fired>\n")
                 * .append("        <hired>").append(textDate).append("T00:00:00+03:00</hired>\n")
                  */
-                .append("        <fired>").append(now).append("</fired>\n")
-                .append("        <hired>").append(now).append("</hired>\n")
+                .append("        <fired>").append(now.getTime()).append("</fired>\n")
+                .append("        <hired>").append(now.getTime()).append("</hired>\n")
                 .append("        <name>").append(worker.getName()).append("</name>\n")
                 .append("        <salary>").append(worker.getSalary()).append("</salary>\n")
                 .append("    </empList>\n")

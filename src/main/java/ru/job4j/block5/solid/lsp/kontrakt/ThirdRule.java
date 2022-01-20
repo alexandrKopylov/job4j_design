@@ -1,10 +1,10 @@
 package ru.job4j.block5.solid.lsp.kontrakt;
 
 /**
- *3. Инварианты (Invariants) — все условия базового класса также должны быть сохранены и в подклассе
- *
+ * 3. Инварианты (Invariants) — все условия базового класса также должны быть сохранены и в подклассе
+ * <p>
  * Инвариант - это условие, которое постоянно на протяжении существования объекта.
- *
+ * <p>
  * Например, есть номер телефона. Есть абонент. От него наследуется абонент какого-то оператора.
  * Но при переопределении сеттера, забыли сделать проверку. Поэтому код в машине запускается успешно.
  * Ошибка остается. Нарушено состояние объекта потомка, потому что в нем не соблюдено условие предка.
@@ -33,7 +33,7 @@ class PhoneNumber {
     }
 }
 
-// абонент
+
 class Subscriber {
 
     protected PhoneNumber phoneNumber;
@@ -66,7 +66,6 @@ class Subscriber {
 }
 
 
-
 class SomeOperatorSubscriber extends Subscriber {
 
     public SomeOperatorSubscriber(PhoneNumber phoneNumber) {
@@ -75,8 +74,10 @@ class SomeOperatorSubscriber extends Subscriber {
 
     @Override
     public void setPhoneNumber(PhoneNumber phoneNumber) {
-        // some specific logic;
-        // Забыли сделать проверку. Возможно не валидное состояние
+        /**
+         *     some specific logic;
+         *      Забыли сделать проверку. Возможно не валидное состояние
+         */
         this.phoneNumber = phoneNumber;
     }
 }
