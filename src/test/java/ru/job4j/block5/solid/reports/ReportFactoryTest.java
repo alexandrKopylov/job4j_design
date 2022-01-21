@@ -20,10 +20,7 @@ public class ReportFactoryTest {
     public void whenReportXML() throws JAXBException {
         MemStore store = new MemStore();
         Calendar now = new GregorianCalendar(2022, Calendar.JANUARY, 17);
-        now.setTimeZone(TimeZone.getTimeZone(ZoneOffset.of("+3")));
-       /**
-        * String textDate = new SimpleDateFormat("yyyy-MM-dd").format(now.getTime());
-        */
+        now.setTimeZone(TimeZone.getTimeZone(ZoneOffset.of("+1")));
         Employee worker = new Employee("Ivan", now, now, 100);
         store.add(worker);
 
@@ -32,12 +29,8 @@ public class ReportFactoryTest {
                 .append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n")
                 .append("<employeesList>\n")
                 .append("    <empList>\n")
-                /**
-                *  .append("        <fired>").append(textDate).append("T00:00:00+03:00</fired>\n")
-                * .append("        <hired>").append(textDate).append("T00:00:00+03:00</hired>\n")
-                 */
-                .append("        <fired>").append(now.getTime()).append("</fired>\n")
-                .append("        <hired>").append(now.getTime()).append("</hired>\n")
+                .append("        <fired>2022-01-17T00:00:00+01:00</fired>\n")
+                .append("        <hired>2022-01-17T00:00:00+01:00</hired>\n")
                 .append("        <name>").append(worker.getName()).append("</name>\n")
                 .append("        <salary>").append(worker.getSalary()).append("</salary>\n")
                 .append("    </empList>\n")
