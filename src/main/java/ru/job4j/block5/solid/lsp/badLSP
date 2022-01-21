@@ -1,0 +1,92 @@
+-------------------------------------------------------------------------
+ 1) Представим, что у нас есть такая функция:
+
+    void drawShape(Shape shape) {
+        if (shape instanceof Square) {
+             drawSquare((Square) shape);
+       } else {
+           drawCircle((Circle) shape);
+       }
+    }
+
+  В ней используется определение класса во время выполнения и в зависимости от результата
+  вызывается нужная функция с явным приведением класса аргумента. И если добавится
+  новый наследник класса Shape, ее нужно будет изменить, так как иначе произойдет вызов drawCircle,
+  которая в лучшем случае выкинет ошибку, а в худшем — отработает некорректно.
+
+
+
+--------------------------------------------------------------------------
+2)  Предположим у нас есть класс, который отвечает за валидацию заказа и проверяет,
+  все ли из товаров заказа находятся на складе.
+  У данного класса есть метод isValid который возвращает true или false:
+
+  class OrderStockValidator {
+     public boolean isValid(Order order) {
+     for (Item item : order.getItems()) {
+     if (! item.isInStock()) {
+             return false;
+      }
+   }
+  return true;
+  }
+  }
+
+  Также предположим, что некоторые заказы нужно валидировать иначе: проверять,
+  все ли товары заказа находятся на складе и все ли товары упакованы.
+  Для этого мы расширили класс OrderStockValidator классом OrderStockAndPackValidator:
+
+  public class OrderStockAndPackValidator extends OrderStockValidator {
+      @Override public boolean isValid(Order order) {
+     for (Item item : order.getItems()) {
+     if ( !item.isInStock() || !item.isPacked() ){
+            throw new IllegalStateException(
+                  String.format("Order %d is not valid!", order.getId())
+            );
+      }
+      }
+      return true;
+     }
+     }
+ Однако в данном классе мы нарушили принцип LSP, так как вместо того, чтобы вернуть false, если заказ не прошел валидацию,
+ наш метод бросает исключение IllegalStateException. Клиенты данного кода не рассчитывают на такое:
+ они ожидают возвращения true или false. Это может привести к ошибкам в работе программы.
+
+
+
+------------------------------------------------------------------------------------------------
+3) Предположим, у нас есть абстрактный класс Bird (Птица), объединяющий животных, которые могут ходить, летать и есть.
+   И мы на основе Bird создали класс Penguin (Пингвин). Поэтому мы ожидаем, что Penguin будет летать, но,
+   к нашему удивлению, метод Fly (Летать) не реализуется в классе Penguin, что приводит к неожиданному поведению.
+
+public abstract class Bird
+{
+    public abstract void Walk();
+    public abstract void Fly();
+    public abstract void Eat();
+}
+
+public class Sparrow : Bird
+{
+    public override void Eat()
+    {        /* Implementation details are hidden */ }
+
+    public override void Fly()
+    {        /* Implementation details are hidden */  }
+
+    public override void Walk()
+    {     /* Implementation details are hidden */  }
+}
+
+
+public class Penguine : Bird
+{
+    public override void Eat()
+    {        /* Implementation details are hidden */  }
+
+    public override void Fly()
+    {        throw new NotImplementedException("Oops.. sorry, I can't fly..");    }
+
+    public override void Walk()
+    {        /* Implementation details are hidden */  }
+}
