@@ -8,7 +8,7 @@ import java.util.function.Predicate;
 
 public interface Store {
 
-    List<? extends Food> findBy(Predicate<? extends Food> filter);
-    public <T extends Food> void add(T t);
+    List<Food> findBy(Predicate<Food> filter);
+
 
 }

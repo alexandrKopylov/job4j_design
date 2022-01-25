@@ -7,7 +7,7 @@ import java.util.function.Predicate;
 
 public class Warehouse implements Store {
     @Override
-    public List<? extends Food> findBy(Predicate<? extends Food> filter) {
+    public List<Food> findBy(Predicate<Food> filter) {
         return null;
     }
 }

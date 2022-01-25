@@ -9,18 +9,14 @@ import java.util.function.Predicate;
 
 public class Shop implements Store {
 
-    private final List<? extends Food> foods = new ArrayList<>();
+    private final List<Food> foods = new ArrayList<>();
 
     @Override
-    public List<? extends Food> findBy(Predicate<? extends Food> filter) {
+    public List<Food> findBy(Predicate<Food> filter) {
         return null;
     }
 
-    @Override
-    public <T extends Food> void add(T t) {
-        foods.add(T t );
-
+    public void add(Food em) {
+        foods.add(em);
     }
-
-
 }
