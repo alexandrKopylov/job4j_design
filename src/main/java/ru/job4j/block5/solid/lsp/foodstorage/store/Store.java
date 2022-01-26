@@ -9,6 +9,6 @@ import java.util.function.Predicate;
 public interface Store {
 
     List<Food> findBy(Predicate<Food> filter);
-
+    public void add(Food food);
 
 }

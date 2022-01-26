@@ -10,4 +10,9 @@ public class Warehouse implements Store {
     public List<Food> findBy(Predicate<Food> filter) {
         return null;
     }
+
+    @Override
+    public void add(Food food) {
+
+    }
 }

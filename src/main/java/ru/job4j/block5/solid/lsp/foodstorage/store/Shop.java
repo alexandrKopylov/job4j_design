@@ -16,7 +16,9 @@ public class Shop implements Store {
         return null;
     }
 
-    public void add(Food em) {
-        foods.add(em);
+    @Override
+    public void add(Food food) {
+        foods.add(food);
     }
+
 }

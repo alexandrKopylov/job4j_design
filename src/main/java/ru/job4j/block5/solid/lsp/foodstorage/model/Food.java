@@ -1,16 +1,17 @@
 package ru.job4j.block5.solid.lsp.foodstorage.model;
 
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 
-public class Food {
+public abstract class Food {
     String name;
-    Calendar createDate;
-    Calendar expiryDate;
+    LocalDateTime createDate;
+    LocalDateTime expiryDate;
     Double price;
     Double discount;
 
-    public Food(String name, Calendar createDate, Calendar expiryDate, Double price, Double discount) {
+    public Food(String name, LocalDateTime createDate, LocalDateTime expiryDate, Double price, Double discount) {
         this.name = name;
         this.createDate = createDate;
         this.expiryDate = expiryDate;
@@ -26,19 +27,19 @@ public class Food {
         this.name = name;
     }
 
-    public Calendar getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Calendar createDate) {
+    public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
 
-    public Calendar getExpiryDate() {
+    public LocalDateTime getExpiryDate() {
         return expiryDate;
     }
 
-    public void setExpiryDate(Calendar expiryDate) {
+    public void setExpiryDate(LocalDateTime expiryDate) {
         this.expiryDate = expiryDate;
     }
 
@@ -62,8 +63,8 @@ public class Food {
     public String toString() {
         return "Food{"
                 + "name='" + name + '\''
-                + ", expiryDate=" + createDate.getTime()
-                + ", createDate=" + expiryDate.getTime()
+                + ", expiryDate=" + createDate
+                + ", createDate=" + expiryDate
                 + ", price=" + price
                 + ", discount=" + discount + '}';
     }
