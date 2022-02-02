@@ -1,54 +1,32 @@
 package ru.job4j.block5.solid.lsp.foodstorage.model;
 
-import java.time.LocalDateTime;
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDate;
 
 public abstract class Food {
     String name;
-    LocalDateTime createDate;
-    LocalDateTime expiryDate;
+    LocalDate createDate;
+    LocalDate expiryDate;
     Double price;
-    Double discount;
+    Double discount = 0.0;
 
-    public Food(String name, LocalDateTime createDate, LocalDateTime expiryDate, Double price, Double discount) {
+    public Food(String name, LocalDate createDate, LocalDate expiryDate, Double price) {
         this.name = name;
         this.createDate = createDate;
         this.expiryDate = expiryDate;
         this.price = price;
-        this.discount = discount;
+
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public LocalDateTime getCreateDate() {
+    public LocalDate getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(LocalDateTime createDate) {
-        this.createDate = createDate;
-    }
-
-    public LocalDateTime getExpiryDate() {
+    public LocalDate getExpiryDate() {
         return expiryDate;
-    }
-
-    public void setExpiryDate(LocalDateTime expiryDate) {
-        this.expiryDate = expiryDate;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
     }
 
     public Double getDiscount() {
