@@ -13,6 +13,7 @@ public class CarParking implements Parking {
     public CarParking(int measureSedans, int measureLorrys) {
         this.measureSedans = measureSedans;
         this.measureLorrys = measureLorrys;
+
     }
 
     @Override
