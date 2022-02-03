@@ -1,4 +1,6 @@
-package ru.job4j.block5.solid.lsp.parking.model;
+package ru.job4j.block5.solid.lsp.parking;
+
+import ru.job4j.block5.solid.lsp.parking.model.Car;
 
 import java.util.ArrayList;
 import java.util.List;
