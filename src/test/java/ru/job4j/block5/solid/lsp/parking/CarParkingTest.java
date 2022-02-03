@@ -7,7 +7,6 @@ import ru.job4j.block5.solid.lsp.parking.model.Lorry;
 import ru.job4j.block5.solid.lsp.parking.model.Sedan;
 
 public class CarParkingTest {
-    @Ignore
     @Test
     public void createParkingSedan2placeLorry1place() {
         boolean bool;
@@ -29,7 +28,6 @@ public class CarParkingTest {
         Assert.assertFalse(Boolean.toString(bool), false);
     }
 
-    @Ignore
     @Test
     public void createParkingSedan2placeAndLorry1PlaceForTwoLorrys() {
         boolean bool;
@@ -44,7 +42,7 @@ public class CarParkingTest {
         bool = carParking.accept(new Lorry(2));
         Assert.assertTrue(Boolean.toString(bool), true);
 
-        bool = carParking.accept(new Lorry(1));
+        bool = carParking.accept(new Lorry(3));
         Assert.assertFalse(Boolean.toString(bool), false);
     }
 }
