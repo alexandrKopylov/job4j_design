@@ -30,7 +30,7 @@ public class CarParking implements Parking {
             bool = true;
         } else if (measureSedans - sedans.size() >= car.getSize()) {
             for (int i = 0; i < car.getSize(); i++) {
-                sedans.add(new Sedan());
+                sedans.add(car);
             }
             bool = true;
         }

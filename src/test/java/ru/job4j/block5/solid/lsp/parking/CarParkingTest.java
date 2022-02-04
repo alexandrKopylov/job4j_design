@@ -9,40 +9,20 @@ import ru.job4j.block5.solid.lsp.parking.model.Sedan;
 public class CarParkingTest {
     @Test
     public void createParkingSedan2placeLorry1place() {
-        boolean bool;
         CarParking carParking = new CarParking(2, 1);
-
-        bool = carParking.accept(new Sedan());
-        Assert.assertTrue(Boolean.toString(bool), true);
-
-        bool = carParking.accept(new Sedan());
-        Assert.assertTrue(Boolean.toString(bool), true);
-
-        bool = carParking.accept(new Sedan());
-        Assert.assertFalse(Boolean.toString(bool), false);
-
-        bool = carParking.accept(new Lorry(4));
-        Assert.assertTrue(Boolean.toString(bool), true);
-
-        bool = carParking.accept(new Lorry(3));
-        Assert.assertFalse(Boolean.toString(bool), false);
+        Assert.assertTrue(carParking.accept(new Sedan()));
+        Assert.assertTrue(carParking.accept(new Sedan()));
+        Assert.assertFalse(carParking.accept(new Sedan()));
+        Assert.assertTrue(carParking.accept(new Lorry(4)));
+        Assert.assertFalse(carParking.accept(new Lorry(4)));
     }
 
     @Test
     public void createParkingSedan2placeAndLorry1PlaceForTwoLorrys() {
-        boolean bool;
         CarParking carParking = new CarParking(2, 1);
-
-        bool = carParking.accept(new Lorry(4));
-        Assert.assertTrue(Boolean.toString(bool), true);
-
-        bool = carParking.accept(new Lorry(3));
-        Assert.assertFalse(Boolean.toString(bool), false);
-
-        bool = carParking.accept(new Lorry(2));
-        Assert.assertTrue(Boolean.toString(bool), true);
-
-        bool = carParking.accept(new Lorry(3));
-        Assert.assertFalse(Boolean.toString(bool), false);
+        Assert.assertTrue(carParking.accept(new Lorry(4)));
+        Assert.assertFalse(carParking.accept(new Lorry(3)));
+        Assert.assertTrue(carParking.accept(new Lorry(2)));
+        Assert.assertFalse(carParking.accept(new Lorry(3)));
     }
 }
