@@ -6,6 +6,7 @@ package ru.job4j.block5.solid.isp;
  */
 public interface Worker {
     void work();
+
     void eat();
 }
 
@@ -24,8 +25,8 @@ class Cook implements Worker {
 }
 
 /**
- *  взяли на работу официантом, сткдента на 4 часа
- *  обед не предоставляется
+ * взяли на работу официантом, сткдента на 4 часа
+ * обед не предоставляется
  */
 class Waiter implements Worker {
 
